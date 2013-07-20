@@ -1,13 +1,14 @@
+/*
+ *
+ * Google search API
+ *
+ */
+
 // Declare variables
 // APIKey and cx come from Google custom search app
 var APIkey = "AIzaSyDyiMofz1ICejp1ZyFpySsWGza9ZgtOc3A";
 var cx = "001099189718690345077:2j68kiguug8";
-var numResults = 5;
-
-// Fill the id="result" element
-function appendResults(html){
-    document.getElementById("results").innerHTML += html;
-}
+var NUMRESULTS = 5;
 
 // Function to get JSON response from query string
 function searchGoogle(){
@@ -15,15 +16,16 @@ function searchGoogle(){
     var firstName = document.getElementById("firstName").value;
     var lastName = document.getElementById("lastName").value;
 
-    // Validate user input
+    // Validate user input. First name and last name cannot be blank.
     if ((firstName.length == 0) || (lastName.length == 0)){
-        appendResults("<img src='google.png' alt='Google' class='logo'/><ul>Firstname and/or Lastname must not be blank");
+        appendResults("<img src='google.png' alt='Google' class='logo'/><p>Firstname and Lastname must not be blank</p>");
     }
+
     // First name and last name are both present, so fetch the JSON results
     else {
         var query = firstName + "%20" + lastName;
         var url = "https://www.googleapis.com/customsearch/v1?key=" + APIkey +
-            "&num=" + numResults +
+            "&num=" + NUMRESULTS +
             "&cx=" + cx +
             "&q=" + query +
             "&callback=?";
@@ -41,11 +43,11 @@ function searchComplete(results){
 
     // If no search results are found, then display a message
     if ((results.items == null) || (results.items.length === 0)){
-        $("#results").html("No matches found for " + query + ".");
+        appendResults("No matches found for " + query + ".");
         return;
     }
 
-    outputHtml += "<p style='font-style:italic'>Returning top " + numResults + " results.</p>";
+    outputHtml += "<p style='font-style:italic'>Returning top " + NUMRESULTS + " results.</p>";
 
     // Loop through returned results and form the potentially massive output string
     for (var i=0; i<results.items.length; i++){
@@ -64,5 +66,6 @@ function searchComplete(results){
         outputHtml += '</li>'; // close class="clearfix"
     }
 
-    $("#results").html(outputHtml);
+    // Display the results
+    appendResults(outputHtml);
 }

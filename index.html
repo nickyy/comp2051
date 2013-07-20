@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-
 		<title>Excel add-on</title>
 		<meta charset="utf">
 
@@ -10,220 +9,171 @@
 			authorize: true
 		</script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script src="common.js"></script>
+        <script src="linkedinSearch.js"></script>
         <script src="googleSearch.js"></script>
-		<script type="text/javascript">
-
-			// Clear the id="result" element
-			function clearList() 
-			{
-				document.getElementById("results").innerHTML = null;
-			}
-
-			// Fill the id="result" element
-			function appendResults(html) 
-			{
-				document.getElementById("results").innerHTML += html;
-			}
-
-			function search()
-			{
-				// Clear the results
-				clearList();
-
-				// Search LinkedIn
-				if (document.getElementById("linkedInCb").checked)
-					searchLinkedIn();
-
-                // Search Google
-                if (document.getElementById("googleCb").checked){
-                    searchGoogle();
-                }
-
-				// TODO: add other networks here
-				return false;
-			}
-
-			// LinkedIn Search
-			function searchLinkedIn()
-			{
-				if (!IN.User.isAuthorized())
-				{
-					alert('Please log into LinkedIn to search in the LinkedIn network.');
-					return;
-				}
-
-				IN.API.PeopleSearch()
-					// Required results data
-					.fields("firstName", "lastName", "positions", "location:(name)", "picture-url", "headline", "summary", "public-profile-url")
-					
-					.params({
-							"first-name": document.getElementById("firstName").value, 
-							"last-name": document.getElementById("lastName").value, 
-							"keywords": document.getElementById("keywords").value,
-							"count": "15", 
-							"sort": "relevance"})
-					.result(displayLinkedInResults)
-					.error(displayPeopleSearchErrors);
-			}
-
-			// Runs when the LinkedIn PeopleSearch() API call returns successfully
-			function displayLinkedInResults(peopleSearch) 
-			{
-				// Variable for that contains a collection of matching members
-				var members = peopleSearch.people.values; 
-
-				// Variable for location in a lower case with removed spaces at the beginning and the end of the entered value
-				var locationName = document.getElementById("location").value.trim().toLowerCase();
-
-				// Variable for results html (with the beginning logo part)
-				var html = '<img src="linkedin.png" alt="LinkedIn" class="logo"/><ul>';
-
-				// Counter for found members (if it is 0 'Nothing found' message will be printed)
-				var membersFound = 0;
-
-				// Loop through the member list and build the html
-				for (var i=0; i < members.length; i++)
-				{
-					var member = members[i];
-
-					// LinkedIn requires a city/country code to make a location search but even with this I couldn't make it, this is a manual filter for that 
-					if (locationName.length > 0) 
-					{
-						// If location is undefined go to the next member
-						if (member.location === undefined) 
-							continue;
-
-						// If location is defined make it lower case
-						var location = member.location.name.toLowerCase();
-
-						// If location doesn't contain the requested city/counry go to the next member
-						if (location.search(locationName) === -1)
-							continue;
-					}
-
-					// Put the found data to the list by adding it to the html variable
-					html += '<li class="clearfix">';
-
-					// If there is no profile image show placeholder from the http://placehold.it source
-					if (member.pictureUrl === undefined)
-						member.pictureUrl = 'http://placehold.it/50x50';
-					
-					// Member's image
-					html += '<img src="'+ member.pictureUrl +'" class="left"/>'; 
-
-					html += '<ul class="left">';
-
-					// Print member's first and last name
-					html += '<li><input type="checkbox" class="checkbox" value=""><p><strong>'+member.firstName + ' ' + member.lastName +'</strong></p></li>';
-
-					// Print member's location if it is defined 
-					if (member.location !== undefined)
-						html += '<li><input type="checkbox" class="checkbox" value=""><p>'+member.location.name+'</p></li>';
-
-					// Print member's headline if it is defined
-					if (member.headline !== undefined)
-						html += '<li><input type="checkbox" class="checkbox" value=""><p>'+member.headline+'</p></li>';
-
-					// Print member's summary if it is defined
-					if (member.summary !== undefined)
-						html += '<li><input type="checkbox" class="checkbox" value=""><p>' +member.summary+ '</p></li>';
-
-					// Print member's LinkedIn profile link
-					html += '<li><input type="checkbox" class="checkbox" value=""><p><a href="'+member.publicProfileUrl+'">'+member.publicProfileUrl+'</a></p></li>';
-
-					html += '</ul>';
-
-					html += '</li>';
-
-					// Increase the founded members by 1
-					membersFound ++;
-				}
-
-				// If nothing found print the 'Nothing found' message
-				if (membersFound == 0)
-				{
-					html += "<li>Nothing found</li>";
-				}
-
-				html += '</ul>';
-
-				// Put the results to the appendResults function
-				appendResults(html);   
-			}
-
-			// This funtion is called if there any errors in the LinkedIn API
-			function displayPeopleSearchErrors(error) { alert(error.message); }
-
-		</script>
+        <script src="facebookSearch.js"></script>
 
 		<link href="style.css" rel="stylesheet" media="screen"> 
 
 	</head>
 	<body>
 
-		<form onsubmit="return search()">
-			<!-- Search part -->
-			<h1>Search engine</h1>
-				<ul>
-					<li>
-						<ul class="clearfix">
-							<li class="clearfix field left">
-								<label class="left">First name:</label>
-								<input class="left" id="firstName" type="text"/>
-							</li>
+    <!--Facebook Stuff-->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            // Hide the search form before login
+            $("#searchForm").css("display", "none");
 
-							<li class="clearfix field right">
-								<label class="left">Last name:</label>
-								<input class="right" id="lastName" type="text"/>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<ul class="clearfix">
-							<li class="clearfix field left">
-								<label class="left">Keywords:</label>
-								<input class="left" id="keywords" type="text"/>
-							</li>					
-							<li class="clearfix field right">
-								<label class="left">Location:</label>
-								<input class="right" id="location" type="text" />
-							</li>
-						</ul>
-					</li>
-					<li class="social">
-						<ul class="clearfix">
-							<li class="clearfix left">
-								<input type="checkbox" class="checkbox" value="LinkedIn" id="linkedInCb">
-								<p>LinkedIn </p>
-								<!-- Doesn't work in Chrome (just in case) -->
-								<script type="in/Login">
-									Hello, <?js= firstName ?> <?js= lastName ?>.
-								</script>
-							</li>
-							<li class="clearfix left">
-								<input type="checkbox" class="checkbox" value="Facebook">
-								<p>Facebook</p>
-							</li>
-							<li class="clearfix left">
-								<input type="checkbox" class="checkbox" value="Twitter">
-								<p>Twitter</p>
-							</li>
-                            <li class="clearfix left">
-                                <input type="checkbox" class="checkbox" value="Google" id="googleCb">
-                                <p>Google</p>
-                            </li>
-							<li class="clearfix right">
-								<input type="submit" class="button" value="Search" id="linkedInSubmit">
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</form> 
-		</form>
+            FB.init({
+                appId: '596883386999558', // App ID
+                channelUrl: 'http://localhost/2051/project/channel.html', // Channel File
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                xfbml: true,  // parse XFBML
+                oauth: true
+            });
 
-		<!-- Results part, id="result" is required for JS -->
-		<form class="result" id="results">
-			
-		</form>
+            // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
+            // for any authentication related change, such as login, logout or session refresh. This means that
+            // whenever someone who was previously logged out tries to log in again, the correct case below
+            // will be handled.
+//            FB.Event.subscribe('auth.authResponseChange', function(response) {
+//                // Here we specify what we do with the response anytime this event occurs.
+//                if (response.status === 'connected') {
+//                    // The response object is returned with a status field that lets the app know the current
+//                    // login status of the person. In this case, we're handling the situation where they
+//                    // have logged in to the app.
+//                    $("#loginfb").css("display", "none");
+//                    $("#logoutfb").css("display", "block");
+//                } else if (response.status === 'not_authorized') {
+//                    // In this case, the person is logged into Facebook, but not into the app, so we call
+//                    // FB.login() to prompt them to do so.
+//                    // In real-life usage, you wouldn't want to immediately prompt someone to login
+//                    // like this, for two reasons:
+//                    // (1) JavaScript created popup windows are blocked by most browsers unless they
+//                    // result from direct interaction from people using the app (such as a mouse click)
+//                    // (2) it is a bad experience to be continually prompted to login upon page load.
+////                    FB.login();
+//                    $("#loginfb").css("display","block");
+//                    $("#logoutfb").css("display","none");
+//                } else {
+//                    // In this case, the person is not logged into Facebook, so we call the login()
+//                    // function to prompt them to do so. Note that at this stage there is no indication
+//                    // of whether they are logged into the app. If they aren't then they'll see the Login
+//                    // dialog right after they log in to Facebook.
+//                    // The same caveats as above apply to the FB.login() call here.
+////                    FB.login();
+//                    $("#loginfb").css("display","block");
+//                    $("#logoutfb").css("display","none");
+//                }
+//            });
+//            $("#loginfb").click(function(){
+//                FB.login(function(response){
+//                    if (response.authResponse){
+//                        testAPI();
+//                    }
+//                    else {
+//                        console.log("User cancelled login or did not fully authorise.");
+//                    }
+//                });
+//            });
+//
+//            // After logout clicked, bring user back to index page
+            $("#logout").click(function(){
+                // Log out of Facebook
+                FB.logout(function(response){
+                    window.location = "http://localhost/2051/project/index.html";
+                });
+
+                // Log out of LinkedIn
+                IN.User.logout();
+            });
+        };
+
+        // Load the SDK asynchronously
+        (function(d){
+            var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement('script'); js.id = id; js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            ref.parentNode.insertBefore(js, ref);
+        }(document));
+
+        // Here we run a very simple test of the Graph API after login is successful.
+        // This testAPI() function is only called in those cases.
+        function testAPI() {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response) {
+                console.log('Good to see you, ' + response.name + '.');
+            });
+        }
+    </script>
+    <!--end Facebook Stuff-->
+
+    <form onsubmit="return search()">
+        <!-- Search part -->
+        <h1>HRSpy Search Engine</h1>
+        <ul>
+            <li>
+                <ul class="clearfix">
+                    <li class="clearfix field left">
+                        <label class="left">First name:</label>
+                        <input class="left" id="firstName" type="text"/>
+                    </li>
+
+                    <li class="clearfix field right">
+                        <label class="left">Last name:</label>
+                        <input class="right" id="lastName" type="text"/>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <ul class="clearfix">
+                    <li class="clearfix field left">
+                        <label class="left">Keywords:</label>
+                        <input class="left" id="keywords" type="text"/>
+                    </li>
+                    <li class="clearfix field right">
+                        <label class="left">Location:</label>
+                        <input class="right" id="location" type="text" />
+                    </li>
+                </ul>
+            </li>
+            <li class="social">
+                <ul class="clearfix">
+                    <li class="clearfix left">
+                        <input type="checkbox" class="checkbox" value="LinkedIn" id="linkedInCb">
+                        <p>LinkedIn </p>
+                        <!-- Doesn't work in Chrome (just in case) -->
+                        <script type="in/Login">
+                            Hello, <?js= firstName ?> <?js= lastName ?>.
+                        </script>
+                    </li>
+                    <li class="clearfix left">
+                        <input type="checkbox" class="checkbox" value="Facebook" id="facebookCb">
+                        <p>Facebook</p>
+                        <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+                    </li>
+                    <li class="clearfix left">
+                        <input type="checkbox" class="checkbox" value="Twitter" id="twitterCb">
+                        <p>Twitter</p>
+                    </li>
+                    <li class="clearfix left">
+                        <input type="checkbox" class="checkbox" value="Google" id="googleCb">
+                        <p>Google</p>
+                    </li>
+                    <li class="clearfix right">
+                        <input type="submit" class="button" value="Search" id="submit">
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <button class="button" type=button id="logout">Logout All</button>
+    </form>
+
+    <!-- Results part, id="results" is required for JS -->
+    <form class="result" id="results"></form>
 	</body>
 </html>
