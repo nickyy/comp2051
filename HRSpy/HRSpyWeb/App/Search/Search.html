@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title></title>
+    <script src="../../Scripts/jquery-1.7.1.js" type="text/javascript"></script>
+
+    <link href="../../Content/Office.css" rel="stylesheet" type="text/css" />
+    <script src="https://appsforoffice.microsoft.com/lib/1.0/hosted/office.js" type="text/javascript"></script>
+
+    <!-- To enable offline debugging using a local reference to Office.js, use:                        -->
+    <!--    <script src="../../Scripts/Office/MicrosoftAjax.js" type="text/javascript"></script>       -->
+    <!--    <script src="../../Scripts/Office/1.0/office.js" type="text/javascript"></script>          -->
+
+    <link href="../App.css" rel="stylesheet" type="text/css" />
+    <script src="../App.js" type="text/javascript"></script>
+    <script src="../Visualization.js" type="text/javascript"></script>
+
+    <link href="Search.css" rel="stylesheet" type="text/css" />
+    <script src="Search.js" type="text/javascript"></script>
+
+    <script src="../googleSearch.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+			api_key: bd81t07wljme
+			authorize: true
+    </script>
+    <script src="../linkedinSearch.js" type="text/javascript"></script>
+    <script src="../facebookSearch.js" type="text/javascript"></script>
+
+</head>
+<body>
+    <div id="content-main">
+
+        <div id="searchContainer">
+            <h1>Search engine</h1>
+
+            <form class="content">
+                <ul>
+                    <li class="clearfix field">
+                        <label>First Name:</label>
+                        <input class="left" type="text" placeholder="John" id="fname" value="Nick" />
+                        <input type="button" class="button" value="Bind" id="fname_bind" />
+                    </li>
+                    <li class="clearfix field">
+                        <label>Last Name:</label>
+                        <input class="left" type="text" placeholder="Doe" id="lname" value="Yuen" />
+                        <input type="button" class="button" value="Bind" id="lname_bind" />
+                    </li>
+
+                    <li class="clearfix field">
+                        <label>City:</label>
+                        <input class="left" type="text" placeholder="Vancouver" id="city" value="Vancouver" />
+                        <input type="button" class="button" value="Bind" id="city_bind" />
+                    </li>
+
+                    <li class="clearfix">
+                        <input type="checkbox" name="socialFilter" value="linkedin">
+                        <p>LinkedIn </p>
+                        <!-- Doesn't work in Chrome (just in case) -->
+                        <script type="in/Login">
+                            Hello, <?js= firstName ?> <?js= lastName ?>.
+                        </script>
+                    </li>
+                    <li class="clearfix">
+                        <input type="checkbox" name="socialFilter" value="facebook">
+                        <p>Facebook</p>
+                        <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+                    </li>
+                    <li class="clearfix">
+                        <input type="checkbox" name="socialFilter" value="twitter">
+                        <p>Twitter</p>
+                    </li>
+                    <li class="clearfix">
+                        <input type="checkbox" name="socialFilter" value="google">
+                        <p>Google</p>
+                    </li>
+                    <li class="clearfix">
+                        <input type="button" class="button" value="Search" id="search" />
+                    </li>
+                </ul>
+            </form>
+        </div>
+
+        <div id="resultsContainer">
+            <h1>Search results</h1>
+            <a id="backToSearch">Back to Search</a>
+            <div id="results">                            
+            </div>
+        </div>
+    </div>
+
+    <!--Facebook Stuff-->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () {
+            // Hide the search form before login
+            $("#searchForm").css("display", "none");
+
+            FB.init({
+                appId: '596883386999558', // App ID
+                channelUrl: '../channel.html', // Channel File
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                xfbml: true,  // parse XFBML
+                oauth: true
+            });
+
+            // After logout clicked, bring user back to index page
+            $("#logout").click(function () {
+                // Log out of Facebook
+                FB.logout(function (response) {
+                    window.location = "/";
+                });
+
+                // Log out of LinkedIn
+                IN.User.logout();
+            });
+        };
+
+        // Load the SDK asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script'); js.id = id; js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            ref.parentNode.insertBefore(js, ref);
+        }(document));
+
+        // Here we run a very simple test of the Graph API after login is successful.
+        // This testAPI() function is only called in those cases.
+        function testAPI() {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function (response) {
+                console.log('Good to see you, ' + response.name + '.');
+            });
+        }
+    </script>
+    <!--end Facebook Stuff-->
+
+    <!-- Page content-->
+    <!--<div id="content-main">
+        <div class="padding">
+            <h1>Bind to Data</h1>
+            <p><strong>Please choose from one of the following options:</strong></p>
+            <button id="insert-sample-data">Insert sample data</button>
+            <button id="bind-to-existing-data">Bind to selection</button>
+        </div>
+    </div>-->
+</body>
+</html>

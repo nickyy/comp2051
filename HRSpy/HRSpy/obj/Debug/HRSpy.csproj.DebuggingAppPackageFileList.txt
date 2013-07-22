@@ -1,0 +1,2 @@
+bin\Debug\OfficeAppManifests\HRSpyManifest.xml
+C:\Users\User\Documents\GitHub\comp2051\HRSpy\HRSpy\bin\Debug\HRSpy.debugapp

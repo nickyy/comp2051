@@ -1,0 +1,148 @@
+﻿/* Page-specific styling */
+
+#content-main {
+    bottom: 50px; /* No footer.  Content should take up all available space*/
+   
+}
+
+#results {
+    
+}
+
+#settings-button {
+    background-image: url("../../Images/Settings.png");
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+}
+
+.notice {
+    padding: 10px 10px 25px 10px;
+    border: 2px solid black;
+}
+
+
+/*Custom HRSpy app*/
+/*@import "common.less";*/
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+img,
+strong,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+ul li {
+  list-style-type: none;
+}
+.left {
+  float: left;
+}
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+body {
+  min-width: 350px;
+  font-family: Arial, Tahoma, sans-serif;
+  color: #353535;
+  font-size: 12px;
+  line-height: 18px;
+  bottom:0;
+}
+ {
+  margin: 10px;
+}
+ h1 {
+  font-weight: normal;
+  font-size: 18px;
+  color: #ff4e00;
+  margin-bottom: 10px;
+}
+ h2 {
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+ h2 a {
+  color: #0068b1;
+}
+ h3 {
+  font-size: 12px;
+}
+ form.content {
+  border: 1px solid #c8c6c9;
+  padding: 20px 10px;
+}
+ form.content li {
+  margin-bottom: 10px;
+  position: relative;
+}
+ form.content li input {
+  position: absolute;
+  top: -2px;
+  left: 0;
+}
+ form.content li input.button {
+  position: relative;
+  background-color: #217345;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  margin-top: 5px;
+}
+ form.content li input.button:hover {
+  background-color: #288b58;
+}
+ form.content li input.button:active {
+  background-color: #217345;
+}
+ form.content li label {
+  width: 50px;
+  line-height: 34px;
+}
+ form.content li input,
+ form.content li label {
+  font-size: 12px;
+}
+ form.content li p {
+  padding-left: 25px;
+}
+ form.content li.field input {
+  border: 1px solid #c8c6c9;
+  padding: 10px;
+  position: relative;
+}
+ form.content.result > ul > li {
+  margin-bottom: 20px;
+}
+ form.content.result > ul > li img {
+  width: 50px;
+  margin-right: 10px;
+}
+ form.content.result > ul > li ul {
+  width: 80%;
+}
+

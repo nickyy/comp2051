@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Excel add-on</title>
+		<meta charset="utf">
+
+		<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+			api_key: bd81t07wljme
+			authorize: true
+		</script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script src="common.js"></script>
+        <script src="linkedinSearch.js"></script>
+        <script src="googleSearch.js"></script>
+        <script src="facebookSearch.js"></script>
+
+		<link href="style.css" rel="stylesheet" media="screen"> 
+
+	</head>
+	<body>
+
+    <!--Facebook Stuff-->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            // Hide the search form before login
+            $("#searchForm").css("display", "none");
+
+            FB.init({
+                appId: '596883386999558', // App ID
+                channelUrl: 'channel.html', // Channel File
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                xfbml: true,  // parse XFBML
+                oauth: true
+            });
+
+            // After logout clicked, bring user back to index page
+            $("#logout").click(function(){
+                // Log out of Facebook
+                FB.logout(function(response){
+                    window.location = "http://localhost/2051/project/index.html";
+                });
+
+                // Log out of LinkedIn
+                IN.User.logout();
+            });
+        };
+
+        // Load the SDK asynchronously
+        (function(d){
+            var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement('script'); js.id = id; js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            ref.parentNode.insertBefore(js, ref);
+        }(document));
+
+        // Here we run a very simple test of the Graph API after login is successful.
+        // This testAPI() function is only called in those cases.
+        function testAPI() {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response) {
+                console.log('Good to see you, ' + response.name + '.');
+            });
+        }
+    </script>
+    <!--end Facebook Stuff-->
+
+    <form onsubmit="return search()">
+        <!-- Search part -->
+        <h1>HRSpy Search Engine</h1>
+        <ul>
+            <li>
+                <ul class="clearfix">
+                    <li class="clearfix field left">
+                        <label class="left">First name:</label>
+                        <input class="left" id="firstName" type="text"/>
+                    </li>
+
+                    <li class="clearfix field right">
+                        <label class="left">Last name:</label>
+                        <input class="right" id="lastName" type="text"/>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <ul class="clearfix">
+                    <li class="clearfix field left">
+                        <label class="left">Keywords:</label>
+                        <input class="left" id="keywords" type="text"/>
+                    </li>
+                    <li class="clearfix field right">
+                        <label class="left">Location:</label>
+                        <input class="right" id="location" type="text" />
+                    </li>
+                </ul>
+            </li>
+            <li class="social">
+                <ul class="clearfix">
+                    <li class="clearfix left">
+                        <input type="checkbox" class="checkbox" value="LinkedIn" id="linkedInCb">
+                        <p>LinkedIn </p>
+                        <!-- Doesn't work in Chrome (just in case) -->
+                        <script type="in/Login">
+                            Hello, <?js= firstName ?> <?js= lastName ?>.
+                        </script>
+                    </li>
+                    <li class="clearfix left">
+                        <input type="checkbox" class="checkbox" value="Facebook" id="facebookCb">
+                        <p>Facebook</p>
+                        <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+                    </li>
+                    <li class="clearfix left">
+                        <input type="checkbox" class="checkbox" value="Twitter" id="twitterCb">
+                        <p>Twitter</p>
+                    </li>
+                    <li class="clearfix left">
+                        <input type="checkbox" class="checkbox" value="Google" id="googleCb">
+                        <p>Google</p>
+                    </li>
+                    <li class="clearfix right">
+                        <input type="submit" class="button" value="Search" id="submit">
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <button class="button" type=button id="logout">Logout All</button>
+    </form>
+
+    <!-- Results part, id="results" is required for JS -->
+    <form class="result" id="results"></form>
+	</body>
+</html>

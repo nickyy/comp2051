@@ -1,0 +1,193 @@
+﻿/* Common app styling */
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+img,
+strong,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+    ul li {
+        list-style-type: none;
+    }
+
+.left {
+    float: left;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+        line-height: 0;
+    }
+
+    .clearfix:after {
+        clear: both;
+    }
+
+#content-main {
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    /*bottom: 50px;  Same value as #content-footer's height */
+    overflow: auto; /* Enable scrollbars within main content section */
+    padding: 10px;
+    width: 440px;
+    height: 480px;
+    border: 1px solid #bbbbbb;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 18px;
+    color: #ff4e00;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+    h2 a {
+        color: #0068b1;
+    }
+
+h3 {
+    font-size: 12px;
+}
+
+form.content {
+}
+
+    form.content li {
+        margin-bottom: 10px;
+        position: relative;
+    }
+
+        form.content li input {
+            position: absolute;
+            left: 0;
+        }
+
+            form.content li input.button {
+                position: relative;
+                background-color: #217345;
+                color: white;
+                border: none;
+                text-transform: uppercase;
+                padding: 13px 10px;
+            }
+
+                form.content li input.button:hover {
+                    background-color: #288b58;
+                }
+
+                form.content li input.button:active {
+                    background-color: #217345;
+                }
+
+        form.content li label {
+            line-height: 34px;
+        }
+
+        form.content li input,
+        form.content li label {
+            font-size: 14px;
+            display: block;
+        }
+
+        form.content li p {
+            padding-left: 25px;
+            font-size: 14px;
+        }
+
+        form.content li.field input[type=text] {
+            border: 1px solid #c8c6c9;
+            padding: 10px;
+            position: relative;
+            width: 360px;
+            margin-right: 10px;
+        }
+
+    form.content.result > ul > li {
+        margin-bottom: 20px;
+    }
+
+        form.content.result > ul > li img {
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        form.content.result > ul > li ul {
+            width: 80%;
+        }
+#resultsContainer {
+    display:none;
+}
+
+#content-footer {
+    background-color: #cecece;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px; /* Fixed footer height */
+    overflow: hidden; /* Disable scrollbars for footer */
+}
+
+.padding {
+    padding: 15px;
+}
+
+#notification-message {
+    background-color: #818285;
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    min-height: 80px;
+    right: 0;
+    z-index: 100;
+    bottom: 0;
+    display: none; /* Hidden until invoked */
+}
+
+#notification-message-header {
+    font-size: medium;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+#notification-message-body {
+    color: #fff;
+}
+
+#notification-message-close {
+    background-image: url("../Images/Close.png");
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
