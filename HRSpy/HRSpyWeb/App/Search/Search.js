@@ -8,10 +8,10 @@
     Office.initialize = function (reason) {
         $(document).ready(function () {
             app.initialize();
-            window.localStorage.clear();
             $('#fname_bind').click(function () { bindToExistingData("fname") });
             $('#lname_bind').click(function () { bindToExistingData("lname") });
             $('#city_bind').click(function () { bindToExistingData("city") });
+            $('#keywords_bind').click(function () { bindToExistingData("keywords") });
             $('#search').click(checkSearchFilters);
             $("#backToSearch").click(function () {
                 document.getElementById("resultsContainer").style.display = "none"
@@ -23,20 +23,29 @@
                     bindToExcelCell(this.value);
                 }
             });
+
+            if (IN.User.isAuthorized()) {
+                //checkbox visible
+            }
+
         });
+        
     };
 
     function bindToExistingData(inputId) {
 
-        //find text to paste into a document
-        var text = document.getElementById(inputId).parentElement.innerHTML;
-        Office.context.document.setSelectedDataAsync(text,
-        function (asyncResult) {
-            var error = asyncResult.error;
-            if (asyncResult.status === Office.AsyncResultStatus.Failed || asyncResult.value == "") {
-                app.showNotification('Could not copy. Please try again.');
-            }
-        });
+        Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
+         { valueFormat: "unformatted", filterType: "all" },
+
+         function (asyncResult) {
+             var error = asyncResult.error;
+             if (asyncResult.status === Office.AsyncResultStatus.Failed || asyncResult.value == "") {
+                 app.showNotification('Could not copy. Please try again.');
+             } else {
+                 document.getElementById(inputId).value = asyncResult.value;
+             }
+         });
+ 
     }
 
     function bindToExcelCell(chbxId) {
@@ -53,8 +62,6 @@
             if (asyncResult.status === Office.AsyncResultStatus.Failed || asyncResult.value == "") {
                 app.showNotification('Please select a cell in a document');
             }
-
-            //document.getElementsByName(chbxId)
         });
     }
     function checkSearchFilters() {
@@ -97,7 +104,7 @@
                         searchGoogle(searchValues.fname, searchValues.lname, searchValues.city);
                         break;
                     case "linkedin":
-                        searchLinkedIn(searchValues.fname, searchValues.lname, searchValues.city);
+                        searchLinkedIn(searchValues.fname, searchValues.lname, searchValues.city, searchValues.keywords);
                         break;
                     case "facebook":
                         searchFacebook(searchValues.fname, searchValues.lname, searchValues.city);

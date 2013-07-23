@@ -1,4 +1,10 @@
 ﻿/* Common app styling */
+body {
+    font-family: Arial, Tahoma, sans-serif;
+    color: #353535;
+    font-size: 12px; line-height: 18px;
+}
+
 div,
 span,
 h1,
@@ -58,7 +64,7 @@ li {
 h1 {
     font-weight: normal;
     font-size: 18px;
-    color: #ff4e00;
+    color: #115B86;
     margin-bottom: 10px;
 }
 
@@ -91,29 +97,29 @@ form.content {
 
             form.content li input.button {
                 position: relative;
-                background-color: #217345;
+                background-color: #115b86;
                 color: white;
                 border: none;
                 text-transform: uppercase;
-                padding: 13px 10px;
+                padding: 10px 10px;
             }
 
                 form.content li input.button:hover {
-                    background-color: #288b58;
+                    background-color: #10557d;
                 }
 
                 form.content li input.button:active {
-                    background-color: #217345;
+                    background-color: #0f4d71;
                 }
 
         form.content li label {
             line-height: 34px;
+            width: 80px;
         }
 
         form.content li input,
         form.content li label {
             font-size: 14px;
-            display: block;
         }
 
         form.content li p {
@@ -123,9 +129,9 @@ form.content {
 
         form.content li.field input[type=text] {
             border: 1px solid #c8c6c9;
-            padding: 10px;
+            padding: 7px 10px;
             position: relative;
-            width: 360px;
+            width: 250px;
             margin-right: 10px;
         }
 

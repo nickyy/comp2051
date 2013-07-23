@@ -33,25 +33,31 @@
     <div id="content-main">
 
         <div id="searchContainer">
-            <h1>Search engine</h1>
+            <h1>HRSpy Search Engine</h1>
 
             <form class="content">
                 <ul>
                     <li class="clearfix field">
-                        <label>First Name:</label>
+                        <label class="left">First Name:</label>
                         <input class="left" type="text" placeholder="John" id="fname" value="Nick" />
-                        <input type="button" class="button" value="Bind" id="fname_bind" />
+                        <input type="button" class="button left" value="Bind" id="fname_bind" />
                     </li>
                     <li class="clearfix field">
-                        <label>Last Name:</label>
+                        <label class="left">Last Name:</label>
                         <input class="left" type="text" placeholder="Doe" id="lname" value="Yuen" />
-                        <input type="button" class="button" value="Bind" id="lname_bind" />
+                        <input type="button" class="button left" value="Bind" id="lname_bind" />
                     </li>
 
                     <li class="clearfix field">
-                        <label>City:</label>
+                        <label class="left">City:</label>
                         <input class="left" type="text" placeholder="Vancouver" id="city" value="Vancouver" />
-                        <input type="button" class="button" value="Bind" id="city_bind" />
+                        <input type="button" class="button left" value="Bind" id="city_bind" />
+                    </li>
+
+                    <li class="clearfix field">
+                        <label class="left">Keywords:</label>
+                        <input class="left" type="text" placeholder="designer" id="keywords" value="" />
+                        <input type="button" class="button left" value="Bind" id="keywords_bind" />
                     </li>
 
                     <li class="clearfix">
@@ -85,12 +91,12 @@
         <div id="resultsContainer">
             <h1>Search results</h1>
             <a id="backToSearch">Back to Search</a>
-            <div id="results">                            
+            <div id="results">
             </div>
         </div>
     </div>
 
-    <!--Facebook Stuff-->
+    <!--Facebook Stuff
     <div id="fb-root"></div>
     <script>
         window.fbAsyncInit = function () {
@@ -138,14 +144,5 @@
     </script>
     <!--end Facebook Stuff-->
 
-    <!-- Page content-->
-    <!--<div id="content-main">
-        <div class="padding">
-            <h1>Bind to Data</h1>
-            <p><strong>Please choose from one of the following options:</strong></p>
-            <button id="insert-sample-data">Insert sample data</button>
-            <button id="bind-to-existing-data">Bind to selection</button>
-        </div>
-    </div>-->
 </body>
 </html>

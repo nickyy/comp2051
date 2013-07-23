@@ -5,7 +5,7 @@
  */
 
 // LinkedIn Search
-function searchLinkedIn(fname, lname, city) {
+function searchLinkedIn(fname, lname, city, keywords) {
     if (!IN.User.isAuthorized()) {
         app.showNotification('Please log in to LinkedIn to search the LinkedIn network.');
     }
@@ -17,7 +17,7 @@ function searchLinkedIn(fname, lname, city) {
         .params({
             "first-name": fname,
             "last-name": lname,
-            "keywords": "",
+            "keywords": keywords,
             "count": "15",
             "sort": "relevance"
         })
@@ -70,22 +70,22 @@ function displayLinkedInResults(peopleSearch, locationName) {
         html += '<ul class="left">';
 
         // Print member's first and last name
-        html += '<li><p><strong>' + member.firstName + ' ' + member.lastName + '</strong></p></li>';
+        html += '<li><input type="checkbox" class="checkbox" value="ln0' + i + '"><p><strong id="ln0'+i+'">' + member.firstName + ' ' + member.lastName + '</strong></p></li>';
 
         // Print member's location if it is defined
         if (member.location !== undefined)
-            html += '<li><p>' + member.location.name + '</p></li>';
+            html += '<li><input type="checkbox" class="checkbox" value="ln1' + i + '"><p id="ln1' + i + '">' + member.location.name + '</p></li>';
 
         // Print member's headline if it is defined
         if (member.headline !== undefined)
-            html += '<li><p>' + member.headline + '</p></li>';
+            html += '<li><input type="checkbox" class="checkbox" value="ln2' + i + '"><p id="ln2' + i + '">' + member.headline + '</p></li>';
 
         // Print member's summary if it is defined
         if (member.summary !== undefined)
-            html += '<li><p>' + member.summary + '</p></li>';
+            html += '<li><input type="checkbox" class="checkbox" value="ln3' + i + '"><p id="ln3' + i + '">' + member.summary + '</p></li>';
 
         // Print member's LinkedIn profile link
-        html += '<li><input type="checkbox" class="checkbox" value="ln' + i + '"> <a href="' + member.publicProfileUrl + '" id="ln' + i + '">' + member.publicProfileUrl + '</a></li>';
+        html += '<li><input type="checkbox" class="checkbox" value="ln4' + i + '"> <a href="' + member.publicProfileUrl + '" id="ln4' + i + '">' + member.publicProfileUrl + '</a></li>';
 
         html += '</ul>';
 
