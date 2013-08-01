@@ -1,0 +1,2 @@
+bin\Debug\OfficeAppManifests\TestExcelManifest.xml
+C:\Users\marina\Documents\Visual Studio 2012\Projects\TestExcel\TestExcel\bin\Debug\TestExcel.debugapp

@@ -1,0 +1,5 @@
+C:\Users\marina\documents\visual studio 2012\Projects\TestExcel\TestExcelWeb\bin\TestExcelWeb.dll
+C:\Users\marina\documents\visual studio 2012\Projects\TestExcel\TestExcelWeb\bin\TestExcelWeb.pdb
+C:\Users\marina\documents\visual studio 2012\Projects\TestExcel\TestExcelWeb\obj\Release\TestExcelWeb.dll
+C:\Users\marina\documents\visual studio 2012\Projects\TestExcel\TestExcelWeb\obj\Release\TestExcelWeb.pdb
+C:\Users\marina\Documents\Visual Studio 2012\Projects\TestExcel\TestExcelWeb\obj\Release\TestExcelWeb.csprojResolveAssemblyReference.cache

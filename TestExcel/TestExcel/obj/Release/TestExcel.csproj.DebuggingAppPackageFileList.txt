@@ -1,0 +1,2 @@
+bin\Release\OfficeAppManifests\TestExcelManifest.xml
+C:\Users\marina\documents\visual studio 2012\Projects\TestExcel\TestExcel\bin\Release\TestExcel.debugapp
