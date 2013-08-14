@@ -1,5 +1,5 @@
-comp2051
-========
+BCIT Comp 2051
+==============
 
 July 29, 2013:
 - Project presentation completed July 24, 2013
