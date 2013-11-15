@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW4 Task 2</title>
+    <meta name="description" content="Javascript program that inputs a student's average and returns 4 if the student's average is 90–100, 3 if the average is 80-89, 2 if the average is 70-79, 1 if the average is 60-69, and 0 if the average is lower than 60. Incorporate the function into a script that reads a value from the user.">
+    <meta charset="utf-8">
+
+    <style>
+        body {
+            font-family: arial, tahoma, sans-serif;
+        }
+    </style>
+    <script>
+        // Declare variables
+        var avg;
+
+        // Prompt for user input
+        avg = prompt("Enter a student's average");
+
+        // Validate user input
+        while(isNaN(avg) || (avg < 0) || (avg > 100) || (avg == '')){
+            avg = prompt("Please enter an integer percentage between 0 and 100 for the student");
+        }
+
+        // Function to determine quality point (grade point) based on average
+        function qualityPoints(average){
+            var qualityPoint;
+            if ((average >= 90) && (average <= 100))    qualityPoint = 4;
+            if ((average <= 89) && (average >= 80))     qualityPoint = 3;
+            if ((average <= 79) && (average >= 70))     qualityPoint = 2;
+            if ((average <= 69) && (average >= 60))     qualityPoint = 1;
+            if (average < 60)                           qualityPoint = 0;
+            return qualityPoint;
+        }
+
+        // Print out user input and computed quality point
+        document.write("<p>Average entered: " + avg + "</p><p>Quality Point: " + qualityPoints(avg) + "</p>");
+    </script>
+</head>
+<body>
+<noscript>
+    <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <p><a href="homework4.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

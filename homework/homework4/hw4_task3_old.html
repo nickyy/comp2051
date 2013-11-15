@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW4 Task 3</title>
+    <meta name="description" content="Javascript program that simulates coin tossing. Let the program toss the coin each time the user clicks the Toss button. Count the number of times each side of the coin appears. Display the results. The program should call a separate function flip that takes no arguments and returns false for tails and true for heads.">
+    <meta charset="utf-8">
+
+    <style>
+        body {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        #heads, #headCount, #headStars {
+            margin: 2px 0;
+            color: red;
+        }
+
+        #tails, #tailCount, #tailStars {
+            margin: 2px 0;
+            color: blue;
+        }
+
+    </style>
+    <script>
+        // Declare and initialise variables
+        var tosses = 0;
+        var heads = 0;
+        var tails = 0;
+        var headStars = "";
+        var tailStars = "";
+
+        // Function to count the number of tosses of a coin and also to output results graphically
+        function toss(){
+            var num = Math.floor(Math.random()*2);
+
+            // Increment toss counter and print it out
+            tosses++;
+            document.getElementById('tossCount').innerHTML = tosses;
+
+            // Toss is heads (or 0)
+            if (num == 0){
+                heads++;
+                headStars += '*';
+                document.getElementById('headStars').innerHTML = headStars;
+                document.getElementById('headCount').innerHTML = heads;
+            }
+            // Toss is tails (or 1)
+            else {
+                tails++;
+                tailStars += '*';
+                document.getElementById('tailStars').innerHTML = tailStars;
+                document.getElementById('tailCount').innerHTML = tails;
+            }
+        }
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <input type="button" value="Toss" onclick="toss()"><br>
+    <p id="tosses">Tosses = <span id="tossCount"></span></p>
+    <table>
+        <tr><td id="heads">Heads</td><td>[<span id="headCount"></span>]</td><td span id="headStars"></span></td></tr>
+        <tr><td id="tails">Tails</td><td>[<span id="tailCount"></span>]</td><td span id="tailStars"></span></td></tr>
+    </table>
+    <p><a href="homework4.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

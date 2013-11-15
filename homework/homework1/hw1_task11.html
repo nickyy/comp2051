@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HW1 Task 11</title>
+    <meta name="description" content="JavaScript that takes three integers from the user and displays the sum, average, smallest, and largest of the numbers in an alert dialog.">
+	<meta charset="utf-8">
+	
+	<script>
+		// Declare and initialize variables
+		var sum = 0;
+		var avg = 0;
+		var largest = 0;
+		var smallest = 0;
+		
+		// Define an array that will store the user inputs
+		var val = new Array(3);
+		
+		var regex = /^[-]?\d+$/;
+		// Get the integer and validate them
+		for (var i=1; i<=val.length; i++){
+			val[i-1] = prompt("Enter integer #" + i);
+			while(!(val[i-1].match(regex))){
+				val[i-1] = prompt("Please re-enter an integer");
+			}
+		}
+				
+		// Calculate the sum
+		for (var j=0; j<val.length; j++){
+			sum += parseInt(val[j], 10);
+		}
+				
+		// Calculate the average
+		avg = (sum/3).toFixed(3);
+		
+		// if the average is a whole number, then don't need to fix decimal places
+		if (avg%1 == 0){
+			avg = (sum/3);
+		}
+		
+		// Get the largest and smallest values in the array
+		largest = Math.max.apply(Math, val);
+		smallest = Math.min.apply(Math, val);
+		
+		// Alert the user inputs and the results
+		alert("Your numbers: " + val[0] + ", " + val[1] + ", " + val[2] + "\n" +
+			  "Sum = " + sum + "\n" +
+			  "Average = " + avg + "\n" +
+			  "Largest = " + largest + "\n" +
+			  "Smallest = " + smallest);
+	</script>
+		
+</head>
+<body>	
+	<noscript>
+		<p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+	</noscript>
+	<a href="homework1.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

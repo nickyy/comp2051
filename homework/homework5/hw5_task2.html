@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW5 Task 2</title>
+    <meta charset="utf-8">
+
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        label {
+            margin: 10px 0;
+            width: 340px;
+            display: inline-block;
+        }
+
+        .inputField {
+            width: 250px;
+        }
+
+        .field {
+            margin: 10px 0;
+        }
+
+        .output {
+            padding-left: 15px;
+            color: green;
+        }
+
+        .error {
+            padding-left: 15px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form action="" name="task2">
+        <div class="field">
+            <label for="task2a">Task 2a. Enter 10 comma-separated values</label>
+            <input type="number" class="inputField" id="task2a" name="task2a" autocomplete="off">
+            <input type="button" class="button" name="task2a" value="Set All To 0" onclick="doTask2a(document.getElementById('task2a').value)">
+            <p class="output" id="task2a_output"></p>
+        </div>
+
+        <div class="field">
+            <label for="task2b">Task 2b. Enter 15 comma-separated values</label>
+            <input type="number" class="inputField" id="task2b" name="task2b" autocomplete="off">
+            <input type="button" name="task2b" value="Add 1 To Elements" onclick="doTask2b(document.getElementById('task2b').value)">
+            <p class="output" id="task2b_output"></p>
+        </div>
+
+        <div class="field">
+            <label for="task2c">Task 2c. Enter 5 comma-separated values</label>
+            <input type="number" class="inputField" id="task2c" name="task2c" autocomplete="off">
+            <input type="button" name="task2c" value="Display BestScores" onclick="doTask2c(document.getElementById('task2c').value)">
+            <p class="output" id="task2c_output"></p>
+        </div>
+
+        <div class="field">
+            <label for="task2d">Task 2d. Enter at least 7 comma-separated values</label>
+            <input type="number" class="inputField" id="task2d" name="task2d" autocomplete="off">
+            <input type="button" name="task2d" value="Display 7th Element" onclick="doTask2d(document.getElementById('task2d').value)">
+            <p class="output" id="task2d_output"></p>
+        </div>
+
+        <div class="field">
+            <label for="task2e">Task 2e. Sum 100 numeric elements of array c (click to populate field)</label>
+            <input type="number" class="inputField" id="task2e" name="task2e" value="" autocomplete="off">
+            <input type="button" name="task2e" value="Click To Sum 100 Numeric Elements" onclick="doTask2e(document.getElementById('task2e').value)">
+            <p class="output" id="task2e_output"></p>
+        </div>
+
+        <div class="field">
+            <div class="A">
+                <label for="task2f_arrayA">Task 2f. Enter 11 comma-separated values (array A)</label>
+                <input type="number" class="inputField" id="task2f_arrayA" name="task2f_arrayA" autocomplete="off">
+            </div>
+            <div class="B">
+                <label for="task2f_arrayB">Enter 34 comma-separated values (array B)</label>
+                <input type="number" class="inputField" id="task2f_arrayB" name="task2f_arrayB" autocomplete="off">
+                <input type="button" name="task2f" value="Copy A to B" onclick="doTask2f(document.getElementById('task2f_arrayA')
+                .value,document.getElementById('task2f_arrayB').value)">
+            </div>
+            <p class="output" id="task2f_output"></p>
+        </div>
+
+        <div class="field">
+            <label for="task2g">Task 2g. Find smallest and largest floating-point values (click to populate field)</label>
+            <input type="number" class="inputField" id="task2g" name="task2g" value="" autocomplete="off">
+            <input type="button" name="task2g" value="Click To Find Smallest/Largest Values Between 0 and 10" onclick="doTask2g(document.getElementById('task2g').value)">
+            <p class="output" id="task2g_output"></p>
+        </div>
+    </form>
+    <script src="hw5_task2.js"></script>
+</body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <p><a href="homework5.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</html>

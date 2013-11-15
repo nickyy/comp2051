@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HW1 Task 7</title>
+    <meta name="description" content="JavaScript program that create a while loop that, by default, displays numbers as: 10 9 8 7 6 5 4 3 2 1, and puts the numbers in HTML table cells.">
+	<meta charset="utf-8">
+	
+	<script>
+		// Prompt user to enter countdown value
+		var userInput = prompt("Enter start of countdown value (or hit ENTER for 10)");
+		
+		// If user hits "Enter" then default to 10
+		if (userInput.length === 0){
+			userInput = 10;
+		}
+		
+		// Validate user input to ensure it is a positive integer
+		var regex = /^\d{0,}[0-9]$/;
+		while (!userInput.match(regex)){
+			userInput = prompt("Countdown value should be a positive integer");
+		}
+		
+		// Create the table based on user input
+		function createTable(userInput){
+			var body = document.getElementsByTagName('body')[0];
+			var myTable = document.createElement('table');
+			
+			// Give the table attributes like a border and width
+			myTable.style.border = '1px solid black';
+			myTable.style.width = '50px';
+			
+			// Create table rows and populate the cells
+			while(userInput>0){
+				var row = myTable.insertRow(-1);
+				var cell = row.insertCell(0);
+				cell.style.border = '1px solid black';
+				cell.innerHTML = userInput;
+				userInput--;
+			}
+			// Add the table to the body
+			body.appendChild(myTable);
+		}
+	</script>
+		
+</head>
+<body>	
+	<noscript>
+		<p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+	</noscript>
+	<script>
+		createTable(userInput);
+	</script>
+	<a href="homework1.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

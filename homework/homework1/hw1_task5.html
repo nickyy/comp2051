@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HW1 Task 5</title>
+    <meta name="description" content="JavaScript program that prompts the user for a phone number and then asks the user for confirmation.">
+	<meta charset="utf-8">
+	
+	<script>
+		// Declare and initialise status flags
+		var phoneValid = false;
+		var phoneConfirmed = false;
+		var phoneInput;
+	
+		// Validate the phone number entered
+		function validatePhone(phone){
+			var phoneRegex = /^\d{10}$/;
+			if (phone.match(phoneRegex)){
+				// If the phone number passes the regex, then return TRUE
+				phoneValid = true;
+			}
+			else {
+				// If the phone number fails the regex, then return FALSE
+				phoneValid = false;
+			}
+			return phoneValid;
+		}
+		
+		// While number is not confirmed, prompt for an input and validate it
+		while(!phoneConfirmed){
+			phoneInput = prompt("Please enter a 10-digit phone number (##########)");
+			validatePhone(phoneInput);
+			
+			// Validate the phone number
+			while(!phoneValid){
+				phoneInput = prompt("That number is invalid. Please try again.");
+				validatePhone(phoneInput);
+			}
+			phoneConfirmed = confirm("Is this the phone number you entered: " + phoneInput);
+		}
+		
+		// Print out the number
+		if (phoneConfirmed && phoneValid){
+			document.write("<p>The phone number you entered was " + phoneInput + ".</p>");
+		}
+	</script>
+		
+</head>
+<body>	
+	<noscript>
+		<p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+	</noscript>
+	<a href="homework1.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

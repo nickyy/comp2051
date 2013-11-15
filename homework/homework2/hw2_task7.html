@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW2 Task 7</title>
+    <meta name="description" content="JavaScript program that will decrypt data that was encrypted with the previous tasks encryption algorithm.">
+    <meta charset="utf-8">
+    <script>
+        // Regex to validate 4-digit number
+        var dataRegex = /^\d{4}$/;
+
+        // Prompt user for input and validate input
+        var data = prompt("Enter a 4-digit integer data to decrypt");
+        while (!(data.match(dataRegex))){
+            data = prompt("ERROR: The 4-digit data you entered was malformed. Please try again.")
+        }
+
+        // Decryption function (for homework 2, task 7)
+        function decrypt(code){
+            var decryptedCode;
+            var chars = new Array();
+
+            // Temp variables to be used later when swapping digits
+            var tempChar0;
+            var tempChar1;
+
+            // Copy each of the encrypted digits to an array
+            for (var i=0; i<code.length; i++){
+                chars[i] = code.charAt(i);
+            }
+
+            // Swap first digit with third
+            tempChar0 = chars[0];
+            chars[0] = chars[2];
+            chars[2] = tempChar0;
+
+            // Swap second digit with fourth
+            tempChar1 = chars[1];
+            chars[1] = chars[3];
+            chars[3] = tempChar1
+
+            // Undo {plus-7 modulus 10} operation by performing {plus-3 modulus 10}
+            for (var j=0; j<chars.length; j++){
+                chars[j] = (Number(chars[j]) + 3) % 10;
+            }
+
+            // Convert each number back to string and concatenate
+            decryptedCode = chars[0].toString() + chars[1].toString() + chars[2].toString() + chars[3].toString();
+
+            return decryptedCode;
+        }
+
+        // Print out encrypted data and decrypted data
+        document.write("<p>Encrypted data: <span style='font-weight:bold'>" + data + "</span>. Decrypted data: <span style='font-weight:bold'>" + decrypt(data) + "</span>.</p>")
+
+        document.write("<p>Congratulations, CodeBreaker! You have successfully decrypted your data.</p>");
+    </script>
+</head>
+
+<body>
+<noscript>
+    <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+</noscript>
+<a href="homework2.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

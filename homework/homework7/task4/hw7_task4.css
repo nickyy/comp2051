@@ -1,0 +1,24 @@
+* {
+    font-family: tahoma, tahoma, sans-serif;
+}
+
+body {
+    background-color: deepskyblue;
+}
+
+label, .property {
+    display: block;
+}
+
+.field {
+    margin: 20px 5px;
+}
+
+legend {
+    font-weight: bold;
+    color: red;
+}
+
+img {
+    width: 200px;
+}

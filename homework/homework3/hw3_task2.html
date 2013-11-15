@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW3 Task 2</title>
+    <meta name="description" content="Javascript program that calculates the product of the odd integers from 1 to 15, then outputs HTML5 text that displays the results.">
+    <meta charset="utf-8">
+    <script>
+        // Declare and initialise variables
+        var prod = 1;
+        var MAXVALUE = 15;
+
+        // Print opening paragraph tag
+        document.write("<p>");
+
+        // Calculate product of odd integers from 1 to 15. To get the odd values, increment the counter by 2.
+        for (var i=1; i<=MAXVALUE; i+=2){
+            prod = prod * i;
+
+            // Print out the odd integers and format the printing
+            if (i != 15){
+                document.write(i + " * ");
+            }
+            else {
+                document.write(i + " = ");
+            }
+        }
+        // Print closing paragraph tag
+        document.write(prod + "</p>");
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <p><a href="homework3.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

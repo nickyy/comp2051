@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW4 Task 4</title>
+    <meta name="description" content="Javascript program that will help and elementary-school student learn multiplication. Use Math.random to produce two positive one-digit integers. It should then display a question such as 'How much is 5 times 6?' The student then types the answer into a text field. Your program checks the student's answer. If it's correct, display the string 'Very good!' and generate a new question. If the answer is wrong, display the strong 'No. Please try again.' And let the student try the same question again repeatedly until he or she finally gets it right. A separate function should be used to generate each new question. This function should be called once when the script begins execution and each time the user answers the question correctly.">
+    <meta charset="utf-8">
+
+    <style>
+        body {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        input, label {
+            display: inline-block;
+            margin: 5px 0;
+        }
+
+        #labelCol {
+            min-width: 120px;
+        }
+
+        .inputField {
+            width: 50px;
+        }
+
+        #feedback {
+            margin-left: 10px;
+        }
+
+        #error {
+            color: red;
+        }
+
+        #correct {
+            color: green;
+        }
+    </style>
+    <script>
+        // Do this after the window loads
+        window.onload = function(){
+            // Declare variables
+            var feedback = document.getElementById('feedback');
+            var answer = document.getElementById('answer');
+
+            // Generate a new question
+            generateQuestion();
+        }
+
+        // Declare variables
+        var num1;
+        var num2;
+
+        // Function to generate a pair of integers
+        function generateQuestion(){
+            // Generate two new integers
+            num1 = Math.floor(Math.random()*10);
+            num2 = Math.floor(Math.random()*10);
+
+            // Print out the integers on the page
+            document.getElementById('num1').innerHTML = num1;
+            document.getElementById('num2').innerHTML = num2;
+
+            // Put the focus on input field
+            answer.focus();
+        }
+
+        // Function to check answer
+        function checkAnswer(userAnswer){
+            var correctAnswer = num1*num2;
+
+            // Validate user input
+            if (answer.value == ''){
+                feedback.innerHTML = "<span id='error'>Please enter a value</span>";
+                answer.focus();
+            }
+            else {
+                // Answer is correct
+                if (Number(userAnswer) === correctAnswer){
+                    feedback.innerHTML = "<span id='correct'>Very good! Try another one!</span>";
+
+                    // Generate a new question and put focus on input field
+                    generateQuestion();
+                    answer.value = '';
+                }
+                // Answer is incorrect
+                else {
+                    feedback.innerHTML = "<span id='error'>Sorry, please try again.</span>";
+
+                    // Highlight incorrect answer
+                    answer.select();
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <label for="answer" id="labelCol">What is <span id="num1"></span> x <span id="num2"></span>?</label><input class="inputField" type="text" name="answer" id="answer" autocomplete="off"><span id="feedback"></span><br>
+
+    <input type="button" name="responseInput" value="Check Answer" onclick="checkAnswer(document.getElementById('answer').value)"><br>
+
+    <p><a href="homework4.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW2 Tasks 6 &amp; 7</title>
+    <meta name="description" content="JavaScript program that will encrypt data and decrypt data based on an algorithm. Your script should read a four digit integer entered by the user in a prompt dialogue and encrypt it as follows:
+    a. Replace each digit by modulus 10 (which means the sum of that digit + 7)
+    b. Swap the first digit with the third
+    c. Swap the second digit with the fourth
+Output text that displays the encrypted integer. Decryption performs the reverse procedure and returns the original data.">
+    <meta charset="utf-8">
+    <script>
+        // Regex to validate 4-digit number
+        var dataRegex = /^\d{4}$/;
+
+        // Prompt user for input and validate input
+        var data = prompt("Enter a 4-digit integer data to encrypt");
+        while (!(data.match(dataRegex))){
+            data = prompt("ERROR: The 4-digit data you entered was malformed. Please try again.")
+        }
+
+        // Encryption function
+        function encrypt(code){
+            // Declare variables
+            var encryptedCode;
+            var chars = new Array();
+
+            // Temp variables to be used later when swapping digits
+            var tempChar0;
+            var tempChar1;
+
+            // Copy each digit entered to an array
+            for (var i=0; i<code.length; i++){
+                chars[i] = code.charAt(i);
+            }
+
+            // Replace each digit with (digit+7) modulus 10
+            for (var j=0; j<chars.length; j++){
+                chars[j] = (Number(chars[j]) + 7) % 10;
+            }
+
+            // Swap first digit with third
+            tempChar0 = chars[0];
+            chars[0] = chars[2];
+            chars[2] = tempChar0;
+
+            // Swap second digit with fourth
+            tempChar1 = chars[1];
+            chars[1] = chars[3];
+            chars[3] = tempChar1;
+
+            // Convert each number back to string and concatenate
+            encryptedCode = chars[0].toString() + chars[1].toString() + chars[2].toString() + chars[3].toString();
+
+            // Return the encrypted code
+            return encryptedCode;
+        }
+
+
+        // Print out encrypted data and decrypted data
+        document.write("<p>Input data: <span style='font-weight:bold'>" + data + "</span>. Encrypted data: <span style='font-weight:bold'>" + encrypt(data) + "</span>.</p>")
+
+        document.write("<p>You have successfully encrypted your data.</p>");
+    </script>
+</head>
+
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <a href="homework2.html">Go back</a> or <input type="reset" value="Play again" onclick='window.location.reload()'>
+</html>

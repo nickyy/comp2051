@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW5 Task 6</title>
+    <meta charset="utf-8">
+    <script src="hw5_task6.js"></script>
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        td:not(.colHead) {
+            border: 1px solid black;
+            padding: 7px;
+            text-align: center;
+        }
+
+        table:not(.colHead) {
+            border-collapse: collapse;
+        }
+
+        label {
+            margin: 10px 0;
+            width: 320px;
+            display: inline-block;
+        }
+
+        .inputField {
+            width: 200px;
+        }
+
+        .field {
+            margin: 10px 0;
+        }
+
+        .output {
+            padding-left: 15px;
+            color: green;
+        }
+
+        .error {
+            padding-left: 15px;
+            color: red;
+        }
+
+        .colHead {
+            font-weight: bold;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="" name="task6">
+        <div class="field">
+            <div class="row1">
+                <label for="task6a_row1">Task 6a. Create Row 1</label>
+                <input type="number" class="inputField" id="task6a_row1" name="task6a_row1" value="">
+            </div>
+            <div class="row2">
+                <label for="task6a_row2">Create Row 2</label>
+                <input type="number" class="inputField" id="task6a_row2" name="task6a_row2" value="">
+                <input type="button" name="task6a" value="Create 2x3 Array" onclick="doTask6a(document.getElementById('task6a_row1').value,document.getElementById('task6a_row2').value)">
+            </div>
+            <p class="output" id="task6a_output"></p>
+        </div>
+
+        <div class="field">
+            <label for="task6b">Task 6b. Names Of Elements Of Row 1</label>
+            <input type="button" id="task6b" name="task6b" value="Get Row 1" onclick="doTask6b()">
+            <p class="output" id="task6b_output"></p>
+        </div>
+
+
+        <div class="field">
+            <label for="task6c">Task 6c. Names Of Elements Of Column 3</label>
+            <input type="button" id="task6c" name="task6c" value="Get Column 3" onclick="doTask6c()">
+            <p class="output" id="task6c_output"></p>
+        </div>
+
+
+        <div class="field">
+            <label for="task6d">Task 6d. Reset To Zero</label>
+            <input type="button" id="task6d" name="task6d" value="Reset To 0" onclick="doTask6d()">
+            <p class="output" id="task6d_output"></p>
+        </div>
+
+        <div class="field">
+            <label for="task6e">Task 6d. Smallest Value</label>
+            <input type="button" id="task6e" name="task6e" value="Find Smallest Value" onclick="doTask6e()">
+            <p class="output" id="task6e_output"></p>
+        </div>
+
+        <div class="field">
+            <label for="task6f">Task 6f. Tabulate t</label>
+            <input type="button" id="task6f" name="task6f" value="Tabulate t" onclick="doTask6f()">
+            <p class="output" id="task6f_output"></p>
+        </div>
+    </form>
+
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <p><a href="homework5.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+    <p id="output"></p>
+</body>
+</html>

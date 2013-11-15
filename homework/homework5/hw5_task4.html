@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW5 Task 4</title>
+    <meta charset="utf-8">
+    <script src="hw5_task4.js"></script>
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            padding: 5px 20px;
+            background-color: dodgerblue;
+            color: white;
+        }
+
+        td.dist {
+            text-align: left;
+            padding-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Dice Sum</th>
+                <th>Frequency</th>
+                <th>%</th>
+                <th>Distribution (each * = ~<span id="granularity"></span> counts)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2</td>
+                <td id="sum2"></td>
+                <td id="prop2"></td>
+                <td class="dist" id="dist_sum2"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td id="sum3"></td>
+                <td id="prop3"></td>
+                <td class="dist" id="dist_sum3"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td id="sum4"></td>
+                <td id="prop4"></td>
+                <td class="dist" id="dist_sum4"></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td id="sum5"></td>
+                <td id="prop5"></td>
+                <td class="dist" id="dist_sum5"></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td id="sum6"></td>
+                <td id="prop6"></td>
+                <td class="dist" id="dist_sum6"></td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td id="sum7"></td>
+                <td id="prop7"></td>
+                <td class="dist" id="dist_sum7"></td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td id="sum8"></td>
+                <td id="prop8"></td>
+                <td class="dist" id="dist_sum8"></td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td id="sum9"></td>
+                <td id="prop9"></td>
+                <td class="dist" id="dist_sum9"></td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td id="sum10"></td>
+                <td id="prop10"></td>
+                <td class="dist" id="dist_sum10"></td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td id="sum11"></td>
+                <td id="prop11"></td>
+                <td class="dist" id="dist_sum11"></td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td id="sum12"></td>
+                <td id="prop12"></td>
+                <td class="dist" id="dist_sum12"></td>
+            </tr>
+        </tbody>
+    </table>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <p><a href="homework5.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

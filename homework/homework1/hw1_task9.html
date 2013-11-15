@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HW1 Task 9</title>
+    <meta name="description" content="JavaScript program that asks the user for the name of the company that developed the JavaScript language. Alert the user when he or she is wrong, and then keep asking the user until he or she gets the correct answer. When the user gets it right, confirm it.">
+	<meta charset="utf-8">
+	
+	<script>
+		var correctAnswer = false;
+		// Prompt the user to enter a response to the question
+		var answer = prompt("Which company developed JavaScript?");
+		
+		// Validate the input
+		while(answer.length == 0){
+			answer = prompt("Please enter your response.");
+		}
+		
+		// Function to verify the answer and provide feedback based on it
+		var regex = /^[nN][eE][tT][sS][cC][aA][pP][eE]$/;
+		function verifyAnswer(myAnswer){
+			// Correct answer; good job!
+			if (myAnswer.match(regex)){
+				alert("That's right!");
+				correctAnswer = true;
+			}
+			// Incorrect answer; ask again
+			else {
+				answer = prompt("Sorry, please try again.");
+				correctAnswer = false;
+			}
+			return correctAnswer;
+		}
+		// Check the answer and prompt if incorrect
+		while(!correctAnswer){
+			verifyAnswer(answer);
+		}
+		
+		// Print out some more information after the correct answer is entered
+		document.write("<p style='font-family:arial;font-size:18px'>JavaScript was developed at Netscape, by Brendan Eich. It was originally called 'LiveScript' but was later renamed to its current name, JavaScript, which coincided with Netscape adding support for Java technology within their Netscape Navigator browser. It has NOTHING to do with Java, by the way!</p>");
+		
+	</script>
+		
+</head>
+<body>	
+	<noscript>
+		<p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+	</noscript>
+	<a href="homework1.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

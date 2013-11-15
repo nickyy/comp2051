@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW3 Task 6</title>
+    <meta name="description" content="Javascript program that reads five numbers between 1 and 30. For each number read, output HTML5 text that displays a line containing the same number of adjacent asterisks. For example your program reads the number 7, it should output HTML5 text that displays *******">
+    <meta charset="utf-8">
+    <style>
+        p {
+            margin: -5px 0;
+        }
+    </style>
+    <script>
+        // Declare input array
+        var inputs = new Array();
+
+        // Declare constants
+        var MAXVALUE = 30;
+        var MINVALUE = 1;
+        var MAXCOUNT = 5;
+
+        // Define the regex for a range of values from 1 to 30
+        var rangeRegex = /^[1-9]{1}$|^[1-2]{1}[0-9]{1}$|^30$/;
+
+        for (var i=0; i<MAXCOUNT; i++){
+            // Prompt the user for MAXCOUNT values
+            inputs[i] = prompt("Please enter value " + Number(i+1));
+
+            // Validate user input
+            while (!(inputs[i].match(rangeRegex))){
+                inputs[i] = prompt("Please enter a value between " + MINVALUE + " and " + MAXVALUE);
+            }
+
+            // For each user value, print out the same number of *'s
+            document.write("<p>");
+            for (var j=0; j<inputs[i]; j++){
+                document.write("*");
+            }
+            document.write("</p>");
+        }
+    </script>
+
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <p><a href="homework3.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

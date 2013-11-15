@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW3 Task 7</title>
+    <meta name="description" content="Javascript program that reads three nonzero integers and determines and prints whether they could represent the sides of a right triangle (remember that a2 + b2 = c2).">
+    <meta charset="utf-8">
+    <script>
+        // Declare and initialise sides array
+        var a, a2, b, b2, c, c2;
+        var sides = [0, 0, 0];
+        var sidesSquared = [0, 0, 0];
+        var hypotenuse;
+
+        // Define refex
+        var intRegex = /^[1-9]\d*$/;
+
+        // Prompt user to input lengths for the three sides
+        for (var i=0; i<sides.length; i++){
+            sides[i] = prompt("Enter an non-zero integer length for side " + Number(i+1));
+
+            // Validate user input
+            while (!(sides[i].match(intRegex))){
+                sides[i] = prompt("The value you entered is invalid. Please enter a non-zero integer length for side " + Number(i+1));
+            }
+        }
+
+        // Sort the sides from smallest to largest
+        function sortNumber(a,b){
+            return a-b;
+        }
+        // Sort the sides from smallest to largest to apply the triangle inequality (the sum of the lengths of any two sides must be greater than the length of the remaining side)
+        a = sides.sort(sortNumber)[0];
+        b = sides.sort(sortNumber)[1];
+        c = sides.sort(sortNumber)[2]; // c must be the hypotenuse
+
+        // Calculate the square of each side
+        a2 = a*a;
+        b2 = b*b;
+        c2 = c*c;
+
+        // Determine if the sides can form the sides of a right riangle
+        if (c2 == a2 + b2){
+            document.write("<p>"+ a + "&sup2; + " + b + "&sup2; = " + c + "&sup2;</p>");
+            document.write("<p>You've got yourself a right triangle!</p>");
+        }
+        else {
+            document.write("<p>Sorry, your sides (" + a + ", " + b + ", " + c + ") cannot make a right triangle!</p>");
+        }
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <p><a href="homework3.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

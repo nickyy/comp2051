@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW6 Task 4</title>
+    <meta charset="utf-8">
+    <script src="hw6_task4b.js"></script>
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        h2 {
+            font-style: italic;
+        }
+
+        label {
+            display: block;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        td {
+            width: 30px;
+        }
+
+        th {
+            background-color: dodgerblue;
+            color: white;
+            width: 150px;
+        }
+
+        #task4a, #task4b {
+            border-bottom: 2px solid blue;
+        }
+
+        table {
+            margin: 20px;
+        }
+
+        table.adjacent {
+            float: left;
+        }
+
+        footer, .task {
+            padding-bottom: 30px;
+            clear: both;
+        }
+
+        caption {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<noscript>
+    <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+</noscript>
+
+<!-- ************************************** TASK 4B *****************************************-->
+<div class="task" id="task4b">
+    <h1>Word Length Counter</h1>
+    <h2>(Note: all apostrophes removed)</h2>
+    <form action="" name="countWordLengths">
+        <label for="task4bTextBox">Enter text into text box</label>
+        <textarea name="task4bTextBox" id="task4bTextBox" cols="50" rows="6" placeholder="Text goes here"></textarea>
+        <input type="button" class="parseTextButton" value="Get Word Lengths" onclick="wordLengths(document.getElementById('task4bTextBox').value)">
+        <input type="reset" class="clearTextButton" value="Clear Text">
+    </form>
+
+    <table title="Summary of word lengths">
+        <thead>
+        <tr>
+            <th>Word Length</th>
+            <th>Count</th>
+            <th>Word(s)</th>
+        </tr>
+        </thead>
+        <tbody id="wordLengthCountTableBody">
+        </tbody>
+    </table>
+</div>
+
+
+
+<footer>
+    <p><a href="homework6.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW5 Task 1</title>
+    <meta charset="utf-8">
+    <script src="hw5_task1.js"></script>
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        table, th, td, tr {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            background-color: blue;
+            color: white;
+        }
+
+        th#range {
+            width: 170px;
+        }
+
+        th#count {
+            width: 60px;
+        }
+
+        #error {
+            color: red;
+            font-style: italic;
+        }
+
+        label, input {
+            margin: 0 12px 12px 0;
+        }
+    </style>
+</head>
+<body>
+    <form action="" name="salaries">
+        <label for="grossSales">Enter gross sales for employee</label><input type="number" id="grossSales"><input type="button" id="updateChart" value="Update" onclick="updateSalary(document.getElementById('grossSales').value)">
+        <span id="error"></span>
+    </form>
+
+    <table>
+        <thead>
+            <tr><th id="range">Salary Range</th><th id="count">Count</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>$200-299</td>
+                <td id="range200-299"></td>
+            </tr>
+            <tr>
+                <td>$300-399</td>
+                <td id="range300-399"></td>
+            </tr>
+            <tr>
+                <td>$400-499</td>
+                <td id="range400-499"></td>
+            </tr>
+            <tr>
+                <td>$500-599</td>
+                <td id="range500-599"></td>
+            </tr>
+            <tr>
+                <td>$600-699</td>
+                <td id="range600-699"></td>
+            </tr>
+            <tr>
+                <td>$700-799</td>
+                <td id="range700-799"></td>
+            </tr>
+            <tr>
+                <td>$800-899</td>
+                <td id="range800-899"></td>
+            </tr>
+            <tr>
+                <td>$900-999</td>
+                <td id="range900-999"></td>
+            </tr>
+            <tr>
+                <td>$1000 and over</td>
+                <td id="range1000-over"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <p><a href="homework5.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+
+</body>
+</html>

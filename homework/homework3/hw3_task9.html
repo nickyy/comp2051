@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW3 Task 9</title>
+    <meta name="description" content="Javascript program that computes the value of e^x by using the formula e^x = 1 + x/1! + x^2/2! + x^3/3! + x^4/4! + …">
+    <meta charset="utf-8">
+    <script>
+        // Declare variables and initialise
+        var e = 0;
+
+        // Declare constants
+        var terms;
+
+        // Function that calculates the factorial of n (using recursion)
+        function factorial(n){
+            if (n == 0){
+                return 1;
+            }
+            else {
+                return factorial(n-1) * n;
+            }
+        }
+
+        // Function to approximate e based on the number of terms
+        function e_to_x(x, terms){
+            // Declare and initialise e^x
+            var eX = 0;
+
+            // Calculate the value for e^x = x^0/0! + x^1/1! + x^2/2! + x^3/3! + x^4/4! + ... + x^n/n!
+            for (var i=0; i<terms; i++){
+                eX = eX + Math.pow(x,i)/factorial(i);
+            }
+            // Print out the approximation
+            document.getElementById('e^x').innerHTML = "e^x ~= " + "<span style='font-weight: bold'>" + eX + "</span>";
+        }
+
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <p>Enter a value for x <input type="text" name="x" id="x" autocomplete="off"></p>
+    <p>Enter the number of terms <input type="text" name="terms" id="terms" autocomplete="off"></p>
+    <p><input type="button" value="Calculate e^x" onclick="e_to_x(document.getElementById('x').value, document.getElementById('terms').value)"></p>
+    <p id="e^x"></p>
+
+    <p><a href="homework3.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

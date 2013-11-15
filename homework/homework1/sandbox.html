@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sandbox</title>
+    <script>
+        var a = prompt("Enter a number");
+        a = Number(a);
+
+        while(isNaN(a)){
+            a = prompt("That wasn't a number");
+        }
+
+        var conf = confirm("Is this your number: " + a);
+
+        function hello(msg){
+            alert(msg);
+        }
+
+        hello("Nicky");
+    </script>
+<body>
+
+</body>
+</html>

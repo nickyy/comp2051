@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW4 Task 6</title>
+    <meta name="description" content="Javascript program returns the total cost of any number of buckets of paint. Ask the user how many buckets he or she is going to buy and for the cost of one bucket. Ask the user the color of the paint. Calculate and return what he or she owes. Change the color of the font to the color of the paint. Use the catch/try/throw statements to check for invalid input if the user doesn’t give you a valid value for the number of buckets, such as a number less than 0, or gives you no input, or types in a string, and so on, check that the user doesn’t give you a color of paint that is the same color as the background of your document or you will not be able to see the color of the font.">
+    <meta charset="utf-8">
+
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        .inputField {
+            width: 70px;
+        }
+
+        label, input {
+            display: inline-block;
+        }
+
+        label {
+            padding: 5px 0;
+        }
+
+        .labelCol {
+            min-width: 150px;
+        }
+
+    </style>
+    <script>
+        // Function to change background colour
+        function changeBackground(colour){
+            document.body.style.backgroundColor = colour;
+        }
+
+        // Function that takes the number of buckets of paint, the unit cost, and the paint colour and processes all that to
+        // yield total cost as well as to change font colour to the paint colour
+        function processOrder(numBuckets, unitCost, fontColour){
+            // Define cost regex
+            var costRegex = /^\d+(.\d{1,2})?$/;
+
+            // Input validation and error handling
+            try {
+                if (numBuckets == '')  throw "Number of buckets cannot be empty";
+                if (isNaN(numBuckets)) throw "Number of buckets must be a number";
+                if (numBuckets < 0)    throw "Number of buckets cannot be a negative number";
+                if (unitCost == '')    throw "Unit cost cannot be empty";
+                if (isNaN(unitCost))   throw "Unit cost must be a number";
+                if (unitCost < 0)      throw "Unit cost cannot be a negative number";
+                if (!(unitCost.match(costRegex))) throw "Unit cost must be a valid price";
+                if (fontColour == document.getElementById('changeBgColour').value) throw "Paint colour must not be " + document.getElementById('changeBgColour').value;
+
+                // Calculate total cost of paint
+                var totalCost = numBuckets * unitCost;
+                totalCost = totalCost.toFixed(2);
+
+                // Display results
+                document.getElementById('output').innerHTML = numBuckets + " buckets x $" + unitCost + "/bucket = $" + totalCost;
+                document.getElementById('output').style.color = fontColour;
+                document.getElementById('output').style.fontWeight = 'bold';
+            }
+            // Print error message based on input
+            catch(err) {
+                document.getElementById('output').style.color = 'black';
+                document.getElementById('output').innerHTML = err;
+            }
+        }
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <form action="">
+        <label for="changeBgColour" class="labelCol">Colour of background</label>
+        <select name="changeBgColour" id="changeBgColour" onchange="">
+            <option value="white">White</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="orange">Orange</option>
+            <option value="yellow">Yellow</option>
+        </select>
+        <input type="button" value="Change Background" onclick="changeBackground(document.getElementById('changeBgColour').value)"><br>
+    </form>
+
+
+    <form name="paintForm" id="paintForm" action="">
+        <label for="buckets" class="labelCol">Number of buckets</label><input type="text" class="inputField" name="buckets" id="buckets" autocomplete="off"><br>
+
+        <label for="cost" class="labelCol">Cost per bucket</label><input type="text" class="inputField" name="cost" id="cost" autocomplete="off"><br>
+
+        <label for="paint" class="labelCol">Colour of paint</label>
+        <select name="paint" id="paint">
+            <option value="white">White</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="orange">Orange</option>
+            <option value="yellow">Yellow</option>
+        </select><br>
+
+        <input type="button" name="getTotalCost" value="Get Total Cost" onclick="processOrder(document.getElementById('buckets').value, document.getElementById('cost').value,document.getElementById('paint').value)"><br>
+        <p id="output"></p>
+    </form>
+
+    <p><a href="homework4.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

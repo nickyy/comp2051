@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW4 Task 8</title>
+    <meta name="description" content="Javascript program that plays a 'guess the number' game as follows: Your program will choose the number to be guessed by selecting a random integer in the range of 1 to 1000. The script displayed the prompt: 'Guess a number between 1 and 1000' next to a text field. The player will then type a first guess into the text field and click a button to submit the gues to the script. If the player's guess is incorrect, your program should display 'Too high. Try again.' or 'Too low. Try again.' to help the player zero in on the correct answer and should clear the text field so the user can enter the next guess. When the user enters the correct answer, display 'Congratulations. You guessed the number!' and clear the text field so the user can play again.">
+    <meta charset="utf-8">
+
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        .inputField {
+            width: 70px;
+        }
+
+        label, input {
+            display: inline-block;
+        }
+
+        label {
+            padding: 5px 0;
+        }
+
+        .labelCol {
+            padding-right: 10px;
+        }
+
+    </style>
+    <script>
+        // Declare variables
+        var num;
+
+        // Define regex
+        var numRegex = /^([1-9][0-9]{0,2}|1000)$/;
+
+        // Function to:
+        // 1. generate a random number
+        // 2. clear input field
+        // 3. put cursor focus in input field
+        function generateNumber(){
+            var guessField = document.getElementById('guess');
+            num = 1 + Math.floor(Math.random()*1000);
+            guessField.value = '';
+            guessField.focus();
+            //alert(num);
+        }
+
+        // Function to process user input
+        function submitGuess(guess){
+            var guessOutput = document.getElementById('guessOutput');
+            var guessField = document.getElementById('guess');
+
+            // Validate user input
+            if (!(guess.match(numRegex))){
+                guessOutput.style.color = "black";
+                guessOutput.innerHTML = "Invalid input.";
+                guessField.value = '';
+                guessField.focus();
+            }
+            else {
+                // Guess is correct
+                if (guess == num){
+                    guessOutput.style.color = "green";
+                    guessOutput.innerHTML = "Congratulations! You guessed the correct number (" + num + ")!";
+                    generateNumber();
+                }
+                else {
+                    // Guess is too low
+                    if (guess < num){
+                        guessOutput.style.color = "red";
+                        guessOutput.innerHTML = "Too low. Try again.";
+                        guessField.value = '';
+                        guessField.focus();
+                    }
+                    // Guess is too high
+                    else {
+                        guessOutput.style.color = "red";
+                        guessOutput.innerHTML = "Too high. Try again.";
+                        guessField.value = '';
+                        guessField.focus();
+                    }
+                }
+            }
+        }
+
+        // Generate a new number as soon as the page has loaded
+        window.onload = function(){
+            generateNumber();
+        };
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <label for="guess" class="labelCol">Guess a number between 1 and 1000 (inclusive)</label><input type="text" class="inputField" name="guess" id="guess" autocomplete="off"><br>
+
+    <input type="button" name="submitGuess" value="Submit Guess" onclick="submitGuess(document.getElementById('guess').value)">
+
+    <p id="guessOutput"></p>
+
+    <p><a href="homework4.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

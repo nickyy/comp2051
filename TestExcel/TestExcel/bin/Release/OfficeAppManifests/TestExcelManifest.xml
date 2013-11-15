@@ -6,7 +6,7 @@
   <ProviderName>marina</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="HRSpy" />
-  <Description DefaultValue="TestExcel Description"/>
+  <Description DefaultValue="Description"/>
   <Capabilities>
     <Capability Name="Workbook" />
   </Capabilities>

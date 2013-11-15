@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW3 Task 1</title>
+    <meta name="description" content="Javascript program that finds the smallest of several non-negative integers. Assume that the first value read specifies the number of values to be input from the user">
+    <meta charset="utf-8">
+    <script>
+        // Declare variables
+        var numValues;
+        var input = new Array();
+        var smallest;
+
+        // Initialise variables
+        numValues = 0;
+        smallest = 0;
+
+        // Define integer regex
+        var intRegex = /^\d+$/;
+
+        // Prompt user for the number of values to sort through
+        numValues = prompt("Enter number of values to sort through");
+
+        // Validate the number of values
+        while(!(numValues.match(intRegex))){
+            numValues = prompt("Please enter the number of values as an integer");
+        }
+
+        // Continue to prompt for values
+        for (var i=0; i<numValues; ++i){
+            // Prompt user for the values to sort
+            var counter = Number(i+1);
+            input[i] = prompt("Enter value " + counter + ": ");
+
+            // Validate user input
+            while (!(input[i].match(intRegex))){
+                input[i] = prompt("Value " + counter + " must be a non-negative integer. Please enter again.");
+            }
+
+            // Convert input to a number
+            input[i] = Number(input[i]);
+
+            // Determine the smallest value of the user input
+            if (!smallest){
+                smallest = input[i];
+            }
+            else {
+                if (input[i] < smallest){
+                    smallest = input[i];
+                }
+            }
+        }
+
+        // Print out all of the input values
+        document.write("<p>Your inputs: ");
+        for (var j=0; j<input.length; j++){
+            document.write(input[j] + " ");
+        }
+        document.write("</p>");
+
+        // Print out the smallest value
+        document.write("<p>The smallest value you input is " + smallest + "</p>");
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <p><a href="homework3.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

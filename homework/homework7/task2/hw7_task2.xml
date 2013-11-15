@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<credentials>
+    <id>
+        <username>user1</username>
+        <password>pass1</password>
+    </id>
+    <id>
+        <username>user2</username>
+        <password>pass2</password>
+    </id>
+    <id>
+        <username>user3</username>
+        <password>pass3</password>
+    </id>
+</credentials>

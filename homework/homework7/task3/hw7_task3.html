@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW7 Task 3</title>
+    <meta charset="utf-8">
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        h1 {
+            background-color: #ccc;
+            padding: 8px 5px;
+            margin: 0;
+        }
+
+        form {
+            background-color: #eee;
+            padding: 5px;
+        }
+
+        dl {
+            width: 700px;
+        }
+
+        #word {
+            margin: 5px 10px;
+            font-weight: bold;
+        }
+
+        #error, #definition {
+            margin: 5px 20px;
+            font-style: italic;
+        }
+
+        #error {
+            color: red;
+        }
+
+        #loading {
+            margin: 0;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        #image {
+            width: 200px;
+        }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>
+        // Lookup function
+        function getDefinition(){
+            var term = document.getElementById("term").value;
+            var error = document.getElementById("error");
+            var dt = document.getElementById("word");
+            var dd = document.getElementById("definition");
+            var image = document.getElementById("image");
+
+            // Function to clear all output text
+            function clearOutput(){
+                error.innerHTML = "";
+                dt.innerHTML = "";
+                dd.innerHTML = "";
+                image.src = "";
+            }
+
+            // Check if input is blank
+            if (term.length == 0){
+                clearOutput();
+                error.innerHTML = "Please enter a search term";
+                return false;
+            }
+
+            // Show the loading image
+            $("#loading").show();
+
+            // Execute AJAX routine to lookup word and retrieve definition
+            $.ajax({
+                url: "hw7_task3.json",
+                // After AJAX call completes, hide the loading image
+                complete: function(){
+//                    alert("done");
+                    $("#loading").hide();
+                },
+                success: function(data){
+                    for (var i=0; i<data.length; i++){
+                        // Check If the search word exists
+                        if (term.trim().toLowerCase() == data[i].word.trim().toLowerCase()){
+                            clearOutput();
+                            dt.innerHTML = data[i].word;
+                            dd.innerHTML = data[i].definition;
+
+                            // If image exists, then load it
+                            if (data[i].image){
+                                image.src = data[i].image;
+                            }
+
+                            return;
+                        }
+                        // Search word is not found
+                        else {
+                            clearOutput();
+                            error.innerHTML = "The word you are looking could not be found.";
+                        }
+                    }
+                }
+            });
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+
+    <h1>Urban Dictionary & Image Lookup</h1>
+    <form action="" name="lookup" onsubmit="return getDefinition()">
+        <label for="term">Term:</label><input type="text" id="term" name="term"><button id="lookup" name="lookup">Lookup</button>
+        <input type="reset" value="Clear">
+    </form>
+    <p id="error"></p>
+    <p id="loading" class="hide"><img alt="Loading..." src="images/ajax-loader.gif"></p>
+    <dl>
+        <dt id="word"></dt>
+        <dd id="definition"></dd>
+    </dl>
+    <img id="image" src="">
+
+    <p><a href="../homework7.html">Go back</a></p>
+
+</body>
+</html>

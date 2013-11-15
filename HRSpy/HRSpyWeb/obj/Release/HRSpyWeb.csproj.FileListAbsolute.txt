@@ -3,3 +3,8 @@ C:\Users\marina\Documents\GitHub\comp2051\HRSpy\HRSpyWeb\bin\HRSpyWeb.pdb
 C:\Users\marina\Documents\GitHub\comp2051\HRSpy\HRSpyWeb\obj\Release\HRSpyWeb.csprojResolveAssemblyReference.cache
 C:\Users\marina\Documents\GitHub\comp2051\HRSpy\HRSpyWeb\obj\Release\HRSpyWeb.dll
 C:\Users\marina\Documents\GitHub\comp2051\HRSpy\HRSpyWeb\obj\Release\HRSpyWeb.pdb
+C:\Users\Nicky\Documents\GitHub\comp2051\HRSpy\HRSpyWeb\bin\HRSpyWeb.dll
+C:\Users\Nicky\Documents\GitHub\comp2051\HRSpy\HRSpyWeb\bin\HRSpyWeb.pdb
+C:\Users\Nicky\Documents\GitHub\comp2051\HRSpy\HRSpyWeb\obj\Release\HRSpyWeb.csprojResolveAssemblyReference.cache
+C:\Users\Nicky\Documents\GitHub\comp2051\HRSpy\HRSpyWeb\obj\Release\HRSpyWeb.dll
+C:\Users\Nicky\Documents\GitHub\comp2051\HRSpy\HRSpyWeb\obj\Release\HRSpyWeb.pdb

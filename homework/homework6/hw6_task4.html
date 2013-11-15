@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW6 Task 4</title>
+    <meta charset="utf-8">
+    <script src="hw6_task4.js"></script>
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        h2 {
+            font-style: italic;
+        }
+
+        label {
+            display: block;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        td {
+            width: 30px;
+        }
+
+        th {
+            background-color: dodgerblue;
+            color: white;
+            width: 150px;
+        }
+
+        #task4a, #task4b {
+            border-bottom: 2px solid blue;
+        }
+
+        table {
+            margin: 20px;
+        }
+
+        table.adjacent {
+            float: left;
+        }
+
+        footer, .task {
+            padding-bottom: 30px;
+            clear: both;
+        }
+
+        caption {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+<!-- ************************************** TASK 4A *****************************************-->
+    <div class="task" id="task4a">
+        <h1>Letter Counter</h1>
+        <form action="" name="countLetters">
+            <label for="task4aTextBox">Enter text into text box</label>
+            <textarea name="task4aTextBox" id="task4aTextBox" cols="50" rows="6" placeholder="Text goes here"></textarea>
+            <input type="button" class="parseTextButton" value="Parse Text" onclick="letterCount(document.getElementById('task4aTextBox').value)">
+            <input type="reset" class="clearTextButton" value="Clear Text">
+        </form>
+
+        <table>
+            <tbody>
+                <tr>
+                    <th>Letter</th><td id="a">a</td><td id="b">b</td><td id="c">c</td><td id="d">d</td><td id="e">e</td><td id="f">f</td><td id="g">g</td><td id="h">h</td><td id="i">i</td><td id="j">j</td><td id="k">k</td><td id="l">l</td><td id="m">m</td><td id="n">n</td><td id="o">o</td><td id="p">p</td><td id="q">q</td><td id="r">r</td><td id="s">s</td><td id="t">t</td><td id="u">u</td><td id="v">v</td><td id="w">w</td><td id="x">x</td><td id="y">y</td><td id="z">z</td>
+                </tr>
+                <tr>
+                    <th>Count</th><td id="countA"></td><td id="countB"></td><td id="countC"></td><td id="countD"></td><td id="countE"></td><td id="countF"></td><td id="countG"></td><td id="countH"></td><td id="countI"></td><td id="countJ"></td><td id="countK"></td><td id="countL"></td><td id="countM"></td><td id="countN"></td><td id="countO"></td><td id="countP"></td><td id="countQ"></td><td id="countR"></td><td id="countS"></td><td id="countT"></td><td id="countU"></td><td id="countV"></td><td id="countW"></td><td id="countX"></td><td id="countY"></td><td id="countZ"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+<!-- ************************************** TASK 4B *****************************************-->
+    <div class="task" id="task4b">
+        <h1>Word Length Counter</h1>
+        <h2>(Note: all apostrophes removed)</h2>
+        <form action="" name="countWordLengths">
+            <label for="task4bTextBox">Enter text into text box</label>
+            <textarea name="task4bTextBox" id="task4bTextBox" cols="50" rows="6" placeholder="Text goes here"></textarea>
+            <input type="button" class="parseTextButton" value="Get Word Lengths" onclick="wordLengths(document.getElementById('task4bTextBox').value)">
+            <input type="reset" class="clearTextButton" value="Clear Text">
+        </form>
+
+        <table title="Summary of word lengths">
+            <thead>
+                <tr>
+                    <th>Word Length</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody id="wordLengthCountTableBody">
+            </tbody>
+        </table>
+    </div>
+
+<!-- ************************************** TASK 4C *****************************************-->
+    <div class="task" id="task4c">
+        <h1>Word Counter</h1>
+        <h2>(Note: all apostrophes removed)</h2>
+        <form action="" name="countWords">
+            <label for="task4cTextBox">Enter text into text box</label>
+            <textarea name="task4cTextBox" id="task4cTextBox" cols="50" rows="6" placeholder="Text goes here"></textarea>
+            <input type="button" class="parseTextButton" value="Count Words" onclick="wordCount(document.getElementById('task4cTextBox').value)">
+            <input type="reset" class="clearTextButton" value="Clear Text">
+        </form>
+
+        <table class="adjacent" title="Summary of word counts">
+            <caption>Word Counts</caption>
+            <thead>
+            <tr>
+                <th>Word</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+            <tbody id="wordCountTableBody">
+            </tbody>
+        </table>
+
+        <table class="adjacent" title="Summary of word counts in alphabetical order">
+            <caption>Word Counts (Alphabetical Order)</caption>
+            <thead>
+            <tr>
+                <th>Word</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+            <tbody id="wordCountTableAlphaBody">
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p><a href="homework6.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+    </footer>
+
+</body>
+</html>

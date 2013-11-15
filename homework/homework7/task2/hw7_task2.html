@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW7 Task 2</title>
+    <meta charset="utf-8">
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        body {
+            background-color: #ccc;
+        }
+
+        #note {
+            font-style: italic;
+        }
+
+        input {
+            margin: 10px 0;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input[type="text"], input[type="password"]{
+            margin-left: 10px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+    <script>
+
+        // Function to validate login credentials
+        function validateLogin(){
+            // Declare and initialize variables
+            var output = document.getElementById("output");
+            var validCredentials = false;
+
+            // Clear any previous output message and formatting [is this necessary?]
+            output.innerHTML = "";
+            output.className = "";
+
+            // Declare and initialize AJAX object
+            var loginHttp;
+            if (window.XMLHttpRequest){
+                // If browser != IE
+                loginHttp = new XMLHttpRequest();
+            }
+            else {
+                // If browser = IE
+                loginHttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            loginHttp.onreadystatechange = function(){
+                if (loginHttp.readyState == 4 && loginHttp.status == 200){
+
+                    var ids = loginHttp.responseXML.getElementsByTagName("id");
+                    var username = document.getElementById("username").value;
+                    var password = document.getElementById("password").value;
+
+                    // Loop through each ID set (user/pass)
+                    for (var i=0; i<ids.length; i++){
+                        var validUsername = loginHttp.responseXML.getElementsByTagName("username")[i].childNodes[0].nodeValue;
+                        var validPassword = loginHttp.responseXML.getElementsByTagName("password")[i].childNodes[0].nodeValue;
+
+                        // Check if username and/or password are empty
+                        if ((username == "") || (password == "")){
+                            output.className = "";
+                            output.className += " error";
+                            output.innerHTML = "User name and/or password must not be blank.";
+
+                            // Exit right away if blank credentials
+                            return validCredentials = false;
+                        }
+                        // Check if credentials are invalid
+                        else if ((username != validUsername) || (password != validPassword)){
+                            validCredentials = false;
+                        }
+                        // Any other username/password are valid
+                        else if ((username == validUsername) && (password == validPassword)){
+                            window.location = "hw7_task2_success.html";
+
+                            // Exit right away if valid credentials
+                            return validCredentials = true;
+                        }
+                    }
+                    // Output error message if credentials are invalid
+                    if (!validCredentials){
+                        output.className = "";
+                        output.className += " error";
+                        output.innerHTML = "User name/password entered is invalid!";
+                    }
+                }
+            };
+            loginHttp.open("GET","hw7_task2.xml",true);
+            loginHttp.send();
+            return validCredentials;
+        }
+
+    </script>
+</head>
+<body>
+
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <h1>Login With Valid Username and Password</h1>
+    <p id="note">Note to Nate: valid logins are "user1/pass1", "user2/pass2", and "user3/pass3"</p>
+
+    <form action="" id="myForm" onsubmit="return validateLogin()">
+        <label for="username">User name:</label><input type="text" id="username" name="username"> <br>
+        <label for="password">Password:</label><input type="password" id="password" name="password"><br>
+        <input type="button" value="Login" onclick="validateLogin(document.getElementById('username').value, document.getElementById('password').value)">
+        <input type="reset" value="Reset">
+    </form>
+    <p id="output"></p>
+
+
+    <p><a href="../homework7.html">Go back</a></p>
+
+</body>
+</html>

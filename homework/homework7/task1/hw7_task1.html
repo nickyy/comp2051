@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW7 Task 1</title>
+    <meta charset="utf-8">
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        body {
+            background-color: #ccc;
+        }
+
+        #required_note {
+            font-style: italic;
+            color: blue;
+        }
+
+        .star {
+            color: red;
+            margin-right: 10px;
+        }
+
+        .field {
+            display: block;
+            margin: 30px 0;
+        }
+
+        .formlabel {
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+        }
+
+        #output {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function validateForm(){
+            // Clear any error messages
+            clearFormMessages();
+
+            // Declare AJAX object variable, and initialise it
+            var xmlhttp;
+            if (window.XMLHttpRequest){
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            var formValid = false;
+
+            // Declare variable containing all form elements
+            var myForm = document.getElementById("myForm");
+
+            // Loop through all form fields
+            for (var i=0; i<myForm.elements.length; i++){
+                // Declare variable to represent the i'th form element
+                var formElement = myForm.elements[i];
+
+                // Check if the form field is required
+                if (formElement.className.indexOf("required") != -1){
+
+                    // Check if the field is for email address
+                    if (formElement.id.indexOf("email") != -1){
+
+                        // Check if email has proper format
+                        if (!validateEmail(formElement)){
+                            formElement.focus();
+                            return formValid = false;
+                        }
+                        else {
+                            var enteredEmail = document.getElementById("email").value;
+                            xmlhttp.onreadystatechange = function(){
+                                if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                                    var disabledEmails = xmlhttp.responseXML.getElementsByTagName("email");
+
+                                    // Loop through emails in list of disabled emails
+                                    for (var i=0; i<disabledEmails.length; i++){
+
+                                        // Declare variable to store i'th disabled email
+                                        var email = disabledEmails[i];
+
+                                        // Check if email entered is disabled
+                                        if (enteredEmail == email.firstChild.nodeValue){
+                                            document.getElementById("emailOutput").innerHTML = "Email entered is disabled!";
+                                            return formValid = false;
+                                        }
+                                    }
+                                    // Email entered is not disabled
+                                    formValid = true;
+                                    window.location = "hw7_task1_success.html";
+                                }
+                            };
+                        }
+                    }
+                    // The current field is not for email
+                    else {
+                        if (!validateFilled(formElement)){
+                            formElement.focus();
+                            return formValid = false;
+                        }
+                    }
+                }
+            }
+            // If all validations pass, then the form is valid
+            xmlhttp.open("GET","hw7_task1.xml",true);
+            xmlhttp.send();
+            return formValid;
+        } // end validateForm()
+
+        // Function to check if field is filled
+        function validateFilled(field){
+            if (field.value.length < 1){
+                document.getElementById(field.id+"Output").innerHTML = "Please enter " + field.id + ".";
+                return false;
+            }
+            else {
+                document.getElementById(field.id+"Output").innerHTML = "";
+                return true;
+            }
+        }
+
+        // Function to validate email format
+        function validateEmail(field){
+            var emailRegex = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9._-]+(\.[a-zA-Z]{2})?\.[a-zA-Z]{2,4}$/;
+            if (!field.value.match(emailRegex)){
+                document.getElementById("emailOutput").innerHTML = "Please enter a valid email address.";
+                return false;
+            }
+            else {
+                document.getElementById("emailOutput").innerHTML = "";
+                return true;
+            }
+        }
+
+        // Function to clear form of any error messages in the form
+        function clearFormMessages(){
+            document.getElementById("nameOutput").innerHTML = "";
+            document.getElementById("commentOutput").innerHTML = "";
+            document.getElementById("emailOutput").innerHTML = "";
+            document.getElementById("checkboxOutput").innerHTML = "";
+            document.getElementById("radioOutput").innerHTML = "";
+            document.getElementById("selectOutput").innerHTML = "";
+        }
+
+
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <h1>Feedback Form</h1>
+    <h2>Please fill out this form to help us improve our site</h2>
+
+    <div id="required_note">
+        <p>Fields marked with a '*' are required.</p>
+    </div>
+    <form id="myForm" action="" onsubmit="return validateForm()">
+        <div class="field" id="nameField">
+            <label class="formlabel" for="name"><span class="star">*</span>Name:</label>
+            <input class="required" type="text" id="name" name="name">
+            <p class="error" id="nameOutput"></p>
+        </div>
+
+        <div class="field" id="commentField">
+            <label class="formlabel" for="comment"><span class="star">*</span>Comments</label><br>
+            <textarea class="required" id="comment" name="comment" cols="50" rows="5"></textarea><br>
+            <p class="error" id="commentOutput"></p>
+        </div>
+
+        <div class="field" id="emailField">
+            <label class="formlabel" for="email"><span class="star">*</span>E-mail Address:</label>
+            <input class="required" type="text" id="email" name="email"><br>
+            <p class="error" id="emailOutput"></p>
+        </div>
+
+        <div class="field" id="likesField">
+            <label class="formlabel">Things you liked:</label><br>
+            <input type="checkbox" name="likes" value="site_design" id="site_design">Site Design
+            <input type="checkbox" name="likes" value="links" id="links">Links
+            <input type="checkbox" name="likes" value="ease_of_use" id="ease_of_use">Ease of use
+            <input type="checkbox" name="likes" value="images" id="images">Images
+            <input type="checkbox" name="likes" value="source_code" id="source_code">Source code<br>
+            <p class="error" id="checkboxOutput"></p>
+        </div>
+
+        <div class="field" id="referenceField">
+            <label class="formlabel" >How did you get to our site?:</label><br>
+            Search engine<input type="radio" name="reference" value="search_engine" id="search_engine">
+            Links from another site<input type="radio" name="reference" value="other_site" id="other_site">
+            BCITComp2051.com website<input type="radio" name="reference" value="website" id="website">
+            Reference in a book<input type="radio" name="reference" value="book" id="book">
+            Other<input type="radio" name="reference" value="other" id="other"><br>
+            <p class="error" id="radioOutput"></p>
+        </div>
+
+        <div class="field" id="ratingField">
+            <label class="formlabel" for="rating">Rate our site:</label>
+            <select name="rating" id="rating">
+                <option value="" selected> - RATING -</option>
+                <option value="amazing">Amazing</option>
+                <option value="10">10</option>
+                <option value="9">9</option>
+                <option value="8">8</option>
+                <option value="7">7</option>
+                <option value="6">6</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+                <option value="awful">Awful</option>
+            </select><br>
+            <p class="error" id="selectOutput"></p>
+        </div>
+
+        <div class="field" id="buttons">
+            <input type="submit" value="Submit Form">
+            <input type="reset" value="Clear Form">
+        </div>
+    </form>
+
+    <p id="output"></p>
+
+    <p><a href="../homework7.html">Go back</a></p>
+</body>
+</html>

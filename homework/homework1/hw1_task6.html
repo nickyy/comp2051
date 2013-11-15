@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HW1 Task 6</title>
+    <meta name="description" content="JavaScript program that asks the user for a Fahrenheit temperature, and then converts it to Celsius. Formula for conversion: C = 5/9(F – 32).">
+	<meta charset="utf-8">
+	
+	<script>
+		// Prompt for user input
+		var userTemp = prompt("Please enter a temperature in degrees Fahrenheit");
+		
+		// Define Fahrenheit to Celsius conversion function
+		function F2C(degF){
+			var degC = (5/9)*(degF - 32);
+			return (degC).toFixed(1);
+		}
+		
+		// Make sure user input is valid
+		while(isNaN(userTemp) || (userTemp.length === 0)){
+			var errorType = typeof(userTemp);
+			userTemp = prompt("You enterd a " + errorType + " or a blank. Please enter a valid temperature to convert.");
+		}
+		
+		// Output the converted value in degrees Celsius
+		document.write("<p>" + userTemp + " F = " + F2C(userTemp) + " C.</p");
+	</script>
+		
+</head>
+<body>	
+	<noscript>
+		<p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+	</noscript>
+	<a href="homework1.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

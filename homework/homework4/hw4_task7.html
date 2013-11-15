@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW4 Task 7</title>
+    <meta name="description" content="Javascript program that will create a clock object that will a) have three properties: seconds, minutes, and hours.
+        b. Write two methods: setTime() to set the current time and displayTime() to display the time.
+        c. The user will be prompted to select either a.m./p.m., or military time. The value he or she chooses will be passed as an argument to the displayTime() method.
+        d. The output will be either 14:10:26 or 2:10:26 pm depending on what argument was passed to the display() method.">
+    <meta charset="utf-8">
+
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+    </style>
+    <script>
+        // Declare variables
+        var seconds;
+        var minutes;
+        var hours;
+
+        // Define time format regex
+        var timeFormatRegex = /^[1,2]{1}$/;
+
+        // Prompt for user input for time format
+        var timeFormat = prompt("Enter (1) for AM/PM or (2) for 24-hour time format");
+
+        // Validate user input
+        while (!(timeFormat.match(timeFormatRegex))){
+            timeFormat = prompt("Please enter (1) for AM/PM or (2) for 24-hour format");
+        }
+
+        // Function to set time variables to current time
+        function setTime(){
+            // Create a new time object
+            var clock = new Date();
+
+            // Assign values to time variables
+            hours = clock.getHours(); // this is 24-hour time by default
+            minutes = clock.getMinutes();
+            seconds = clock.getSeconds();
+            //document.getElementById('setMessage').innerHTML = "The current time has been set";
+        }
+
+        // Function to display time based on time format
+        function displayTime(format){
+            var timeOfDay;
+            var formatString;
+
+            // Add a 0 to minutes if it's less than 10
+            if (minutes < 10){
+                minutes = "0" + minutes;
+            }
+
+            // Add a 0 to seconds if it's less than 10
+            if (seconds < 10){
+                seconds = "0" + seconds;
+            }
+
+            // AM/PM format
+            if (format == '1'){
+                formatString = "AM/PM";
+                timeOfDay = (hours < 12) ? " AM" : " PM";
+
+                hours = Number(hours);
+                // Convert hours from 24-hour to 12-hour
+                if (hours > 12){
+                    hours = hours - 12;
+                }
+            }
+            // 24-Hour format
+            else {
+                // Pad with a leading 0 if the hours is less than 10
+                if (Number(hours) < 10){
+                    hours = "0" + hours;
+                }
+                formatString = "24-hour";
+                timeOfDay = "";
+            }
+
+            // Print the time
+            document.getElementById('outputTime').innerHTML = "The current time in " + formatString + " format is <span style='font-weight:bold'>" + hours + ":" + minutes + ":" + seconds + timeOfDay + "</span>.";
+        }
+
+        // Execute functions after the page loads
+        window.onload = function(){
+            setTime();
+            displayTime(timeFormat);
+        };
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <p id="outputTime"></p>
+
+    <p><a href="homework4.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

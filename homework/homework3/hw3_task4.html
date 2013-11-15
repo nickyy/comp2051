@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW3 Task 4</title>
+    <meta name="description" content="JavaScript program that uses repetition and switch structures to print the song 'The Twelve Days of Christmas'">
+    <meta charset="utf-8">
+    <script>
+        // Declare variables
+        var ordinalDay; // ie. first, second, third, ... , eleventh, twelfth
+        var cumulativeGift;
+        var gift;
+        var MAXDAYS = 12;
+        var previousGifts;
+
+        document.write("<h1 style='text-decoration: underline'>The Twelve Days of Christmas</h1>")
+        // Loop through each day and determine the gift
+        for (var day=1; day<=MAXDAYS; day++){
+            document.write("<p>On the ");
+            switch(day){
+                case (1):
+                    ordinalDay = "first";
+                    gift = "partridge in a pear tree.";
+                    previousGifts = "and a " + gift;
+                    break;
+                case (2):
+                    ordinalDay = "second";
+                    gift = "Two turtle doves,";
+                    break;
+                case (3):
+                    ordinalDay = "third";
+                    gift = "Three French Hens,";
+                    break;
+                case (4):
+                    ordinalDay = "fourth";
+                    gift = "Four colly birds,";
+                    break;
+                case (5):
+                    ordinalDay = "fifth";
+                    gift = "Five gold rings,";
+                    break;
+                case (6):
+                    ordinalDay = "sixth";
+                    gift = "Six geese a laying,";
+                    break;
+                case (7):
+                    ordinalDay = "seventh";
+                    gift = "Seven swans a swimming,";
+                    break;
+                case (8):
+                    ordinalDay = "eighth";
+                    gift = "Eight maids a milking,";
+                    break;
+                case (9):
+                    ordinalDay = "ninth";
+                    gift = "Nine ladies dancing,";
+                    break;
+                case (10):
+                    ordinalDay = "tenth";
+                    gift = "Ten lords a leaping,";
+                    break;
+                case (11):
+                    ordinalDay = "eleventh";
+                    gift = "Eleven pipers piping,";
+                    break;
+                case (12):
+                    ordinalDay = "twelfth";
+                    gift = "Twelve drummers drumming,";
+                    break;
+                default:
+                    break;
+            }
+            // Day 1 - Partridge with a capital A
+            if (day == 1){
+                cumulativeGift = "A " + gift;
+            }
+            // All other days
+            else {
+                // The latest gift is the current gift plus all previous day's gifts
+                cumulativeGift = gift + "<br>" + previousGifts;
+
+                // Update previous gifts now to contain all gifts
+                previousGifts = cumulativeGift;
+            }
+            // Print out the first line plus the accumulation of all gifts
+            document.write("<span style='font-weight:bold'>"+ ordinalDay + "</span> day of Christmas<br>my true love sent to me:<br>" + cumulativeGift + "<br>");
+        }
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <a href="homework3.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

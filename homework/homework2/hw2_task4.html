@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW2 Task 4</title>
+    <meta name="description" content="JavaScript program that determines the largest of a set of single-digit numbers, and outputs a message that displays the largest number. User is given option of either counter-controlled or sentinel-controlled repetition.">
+    <meta charset="utf-8">
+    <script>
+        // Declare variables
+        var mode;
+        var input;
+        var inputArray = new Array();
+        var largest;
+
+        // Define regex
+        var inputRegex = /^[-]?\d{1}$/;
+        var modeRegex = /^[1,2]$/;
+
+        // Mode 1: counter-controlled reptition, Mode 2: sentinel-controlled repetition
+        mode = prompt("Which mode would you like to run the program in: (1) Counter Controlled, or (2) Sentinel Controlled?");
+
+        while (!(mode.match(modeRegex))){
+            mode = prompt("Please enter either (1) Counter Controlled or (2) Sentinel Controlled") ;
+        }
+
+        // Function that determines largest integer input, via sentinel-controlled repetition
+        function largestInt_SC() {
+            // Initialise variables
+            var count = 0;
+
+            // Prompt user for input, or Q to stop program
+            input = prompt("Enter a single-digit number (positive or negative), or q to stop");
+
+            while (input != 'q'){
+
+                // Validate user input
+                while (!(input.match(inputRegex))){
+                    input = prompt("Oops! Please enter a single-digit number (positive or negative)");
+                }
+
+                // Write the input into an array (for printing later on)
+                inputArray[count] = input;
+
+                // Determine the largest value input so far
+                if (!largest){ // if largest is undefined, then the current input is the largest
+                    largest = input;
+                }
+                else {
+                    if (input > largest){
+                        largest = input;
+                    }
+                }
+
+                // Increment inputArray index
+                count++;
+
+                // Prompt user for next input
+                input = prompt("Enter a single-digit number (positive or negative), or q to stop");
+            }
+
+            if (inputArray.length > 0){
+                // Print out the results (using proper HTML syntax)
+                document.write("<p>Your inputs: ");
+                for (var i=0; i<inputArray.length; i++){
+                    document.write(inputArray[i] + " ");
+                }
+                document.write("</p>");
+                document.write("<p>The largest value you input is " + largest + "</p>")
+            }
+            else {
+                document.write("<p>You didn't input anything!</p>");
+            }
+        }
+
+        // Function that determines largest integer input, via counter-controlled repetition
+        function largestInt_CC(){
+            // Declare constants
+            var MAX_COUNT = 10;
+
+            // Initialise variables
+            var count = 0;
+
+            while (count < MAX_COUNT){
+                // Prompt counter
+                var countdown = MAX_COUNT - count;
+
+                // Prompt user for input
+                input = prompt("Enter a single-digit number (positive or negative): (" + countdown + " more to go)");
+
+                // Validate user input
+                while (!(input.match(inputRegex))){
+                    input = prompt("Oops! Please enter a single-digit number (positive or negative)");
+                }
+
+                // Write the input into an array (for printing later on)
+                inputArray[count] = input;
+
+                // Determine the largest value input so far
+                if (!largest){ // if largest is undefined, then the current input is the largest
+                    largest = input;
+                }
+                else {
+                    if (input > largest){
+                        largest = input;
+                    }
+                }
+
+                // Increment control counter
+                count++;
+            }
+
+            if (inputArray.length > 0){
+                // Print out the results (using proper HTML syntax)
+                document.write("<p>Your inputs: ");
+                for (var i=0; i<MAX_COUNT; i++){
+                    document.write(inputArray[i] + " ");
+                }
+                document.write("</p>");
+                document.write("<p>The largest value you input is " + largest + "</p>")
+            }
+            else {
+                document.write("<p>You didn't input anything!</p>");
+            }
+        }
+
+
+        if (mode == '1'){
+            largestInt_CC();
+        }
+        else {
+            largestInt_SC();
+        }
+
+    </script>
+</head>
+
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <a href="homework2.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

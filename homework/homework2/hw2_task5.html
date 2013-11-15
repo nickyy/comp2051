@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW2 Task 5</title>
+    <meta name="description" content="JavaScript program that outputs HTML5 text that keeps displaying in the browser window the multiples of the integer 2 – namely, 2, 4, 8, 16, 32, 64, etc. Your loop should not terminate (make it an infinite loop).">
+    <meta charset="utf-8">
+    <script>
+        // Notify user of outcome of script and ask for permission to continue
+        var allow = confirm("The following script creates an infinite loop. Continue?");
+
+        if (allow){
+
+            // Prompt again to make sure user really is so brave!
+            var allow2 = confirm("It's not too late to stop. Do you still want to continue? LAST WARNING!!");
+
+            // You asked for it!
+            if (allow2){
+                // Create an infinite loop; i would NEVER be negative in this for loop
+                for (var i=1; i<0; i++){
+                    document.write("<p>" + i*2 + "</p>");
+                }
+            }
+            else {
+                document.write("<p>Whoa, you just dodged a bullet! Your browser (and possibly your computer) would have become frozen, the memory on your computer would have been eaten away, your programs would practically stop running, you'd go crazy, you wouldn't finish your homework, you wouldn't be able to eat or sleep, you would drop out of the course..... maybe!</p>");
+            }
+        }
+        else {
+            document.write("<p>Good choice. Your browser (and possibly your computer) would have become frozen, the memory on your computer would have been eaten away, your programs would practically stop running, you'd go crazy, you wouldn't finish your homework, you wouldn't be able to eat or sleep, you would drop out of the course..... maybe!</p>");
+        }
+    </script>
+</head>
+
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <a href="homework2.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

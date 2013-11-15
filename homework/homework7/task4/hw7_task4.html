@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW7 Task 4</title>
+    <link href="hw7_task4.css" type="text/css" rel="stylesheet">
+    <script src="hw7_task4.js"></script>
+</head>
+<body>
+
+    <h1>Yo, Pimp My Text, Aight!?</h1>
+    <img src="images/hw7_task4_snoopdogg.jpg">
+    <form action="" name="pimpMyText">
+        <fieldset class="field">
+            <legend>Text</legend>
+            <textarea id="text" rows="4" cols="30"></textarea>
+        </fieldset>
+
+        <fieldset class="field">
+            <legend>Pimpification</legend>
+            <div class="property">
+                <input type="button" name="biggerPimpin" value="Bigger Trippin' Pimpin!" id="biggerPimpin" onclick="pimpText()">
+                <!--<input type="button" name="stop" value="Stop" id="stop" onclick="stopText()">-->
+            </div>
+            <div class="property">
+                <input type="checkbox" name="bling" value="bling" id="bling" onchange="blingText()">Blingity Bling Bling
+            </div>
+            <div class="property">
+                <input type="button" name="snoopify" value="Snoopify Yo Dawg" id="snoopify" onclick="snoopifyText()">
+            </div>
+
+            <div class="property">
+                <input type="button" name="pigLatin" value="Igpay Atlinay" id="pigLatin" onclick="pigLatinText()">
+            </div>
+
+            <div class="property">
+                <input type="button" name="malkovich" value="Malkovichication" id="malkovich" onclick="malkovichText()">
+            </div>
+        </fieldset>
+
+        <div class="clear">
+            <input type="reset" name="clear" value="Fo'shizzle Clear Dat Text">
+        </div>
+    </form>
+
+    <p><a href="../homework7.html">Go back</a></p>
+
+</body>
+</html>

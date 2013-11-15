@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW3 Task 5</title>
+    <meta name="description" content="Javascript program that determine each product’s retail price and calculates and output HTML5 that displays the total value of all the products sold last week. Use a prompt dialog to obtain the product number and quantity from the user. Use a sentinel-controlled loop to determine when the program should stop looping and display the final results.">
+    <meta charset="utf-8">
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        table {
+            width: 600px;
+            margin: 20px auto;
+        }
+
+        table, td, th{
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            background-color: blue;
+            color: white;
+        }
+
+        tfoot td {
+            text-align: right;
+        }
+        th {
+            padding: 3px 5px;
+        }
+
+        .evenRow {
+            background-color: lightblue;
+        }
+        caption {
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+    </style>
+    <script>
+        // Define constants
+        var MAXPRODUCTS = 5;
+
+        // Declare variables and initialise
+        var p_q;        // product/quantity pair
+        var p_q_arr;    // product/quantity array
+        var q;          // quantity
+        var totalQ = new Array(MAXPRODUCTS); // Stores the total quantity of each of the 5 products
+        var p;          // product
+        var totalP = new Array(MAXPRODUCTS); // Stores the total profit for each of the 5 products
+        var price;      // unit price for each product
+        var priceArr = new Array(MAXPRODUCTS); // Stores the price for each product
+        var profit = 0;
+        var grossProfit = 0;
+        var rowCounter = 1;
+
+        // Define regex
+        var pRegex = /^[-]?[1-5]{1}$/;
+        var qRegex = /^\d*$/;
+
+        // Initialize all arrays
+        for (var j=0; j<MAXPRODUCTS; j++){
+            totalQ[j] = 0;
+            totalP[j] = 0;
+            priceArr[j] = 0;
+        }
+
+        // Prompt for user input a comma-separated value for product and quantity, or -1 to stop
+        p_q = prompt("Enter a [product,quantity] pair (or just -1 to stop)");
+
+        // Parse input into array
+        p_q_arr = p_q.split(",");
+
+        // Write table for each sales transaction
+        document.write("<table><caption>Individual Sales Transactions</caption><thead><tr><th>Product</th><th>Unit Price</th><th>Quantity</th><th>Profit</th></tr></thead><tbody>");
+        while (p_q != -1){
+            while (p_q_arr.length != 2){
+                p_q = prompt("Oops! Please enter a [product,quantity] pair");
+                p_q_arr = p_q.split(",");
+            }
+            p = p_q_arr[0];
+            q = p_q_arr[1];
+
+            while (!(p.match(pRegex))){
+                p = prompt("Oops! Product number must be 1 to 5");
+            }
+
+            while (!(q.match(qRegex))){
+                q = prompt("Oops! Quantity must be a positive integer");
+            }
+
+            // Convert to number type
+            p = Number(p);
+            q = Number(q);
+
+            switch (p){
+                case (1):
+                    price = 2.98;
+                    priceArr[0] = price;
+                    totalQ[0] = totalQ[0] + q;
+                    totalP[0] = totalP[0] + (price * q);
+                    break;
+                case (2):
+                    price = 4.50;
+                    priceArr[1] = price;
+                    totalQ[1] = totalQ[1] + q;
+                    totalP[1] = totalP[1] + (price * q);
+                    break;
+                case (3):
+                    price = 9.98;
+                    priceArr[2] = price;
+                    totalQ[2] = totalQ[2] + q;
+                    totalP[2] = totalP[2] + (price * q);
+                    break;
+                case (4):
+                    price = 4.49;
+                    priceArr[3] = price;
+                    totalQ[3] = totalQ[3] + q;
+                    totalP[3] = totalP[3] + (price * q);
+                    break;
+                case (5):
+                    price = 6.87;
+                    priceArr[4] = price;
+                    totalQ[4] = totalQ[4] + q;
+                    totalP[4] = totalP[4] + (price * q);
+                    break;
+                default:
+                    // User should never get here
+                    break;
+            }
+
+            // Calculate the profit
+            profit = price * q;
+
+            // Update the gross profit
+            grossProfit = grossProfit + profit;
+
+            // Print the results to the table
+            if (rowCounter%2 == 0){
+                document.write("<tr class='evenRow'><td>" + p + "</td><td>$" + price.toFixed(2) + "</td><td>" + q + "</td><td>$" + profit.toFixed(2) + "</td></tr>");
+            }
+            else {
+                document.write("<tr'><td>" + p + "</td><td>$" + price.toFixed(2) + "</td><td>" + q + "</td><td>$" + profit.toFixed(2) + "</td></tr>");
+            }
+
+            // Prompt user for next set of inputs
+            p_q = prompt("Enter a [product,quantity] pair (or -1 to stop)");
+            p_q_arr = p_q.split(",");
+            rowCounter++;
+        }
+        // Print out the gross profit for the sales transactions table
+        document.write("</tbody><tfoot><tr><td colspan=4 style='font-weight:bold'>Gross profit = $" + grossProfit.toFixed(2) + "</td></tr></tfoot></table>");
+
+        // Write summary table for cumulative sales
+        document.write("<table><caption>Sales Summary</caption><thead><tr><th>Product</th><th>Unit Price</th><th>Total Quantity</th><th>Total Profit</th></tr></thead><tbody>");
+        for (var i=1; i<=MAXPRODUCTS; i++){
+            if (i%2 == 0){
+                document.write("<tr class='evenRow'><td>" + i + "</td><td>$" + priceArr[i-1].toFixed(2) + "</td><td>" + totalQ[i-1] + "</td><td>$" + totalP[i-1].toFixed(2) + "</td></tr>");
+            }
+            else {
+                document.write("<tr><td>" + i + "</td><td>$" + priceArr[i-1].toFixed(2) + "</td><td>" + totalQ[i-1] + "</td><td>$" + totalP[i-1].toFixed(2) + "</td></tr>");
+            }
+        }
+
+        // Print out the gross profit for the sales summary table
+        document.write("</tbody><tfoot><tr><td colspan=4 style='font-weight:bold'>Gross profit = $" + grossProfit.toFixed(2) + "</td></tr></tfoot></table>");
+
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <p><a href="homework3.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

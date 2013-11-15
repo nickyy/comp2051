@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW3 Task 6</title>
+    <meta name="description" content="Javascript program that evaluates the factorials of the integers from 1 to 5. Display the results in tabular format.">
+    <meta charset="utf-8">
+    <script>
+        // Declare variable
+        var n;
+
+        // Define integer regex
+        var intRegex = /^\d+$/;
+
+        // Prompt for user input, or default to 5
+        n = prompt("Enter an integer to calculate the factorial of, or hit Enter for n=5", 5);
+
+        // Validate user input
+        while(!(n.match(intRegex))){
+            n = prompt("Please enter an positive integer");
+        }
+
+        // Function that calculates the factorial of n (non-recursion)
+        function factorial(n){
+            var fact = 1;
+            if (n == 0){
+                return 1;
+            }
+            else {
+                for (var i=n; i>0; i--){
+                    fact = fact * i;
+                }
+                return fact;
+            }
+        }
+
+        // Print table
+        document.write("<table><caption>Fun With Factorials!</caption><thead><tr><th>n</th><th>n!</th></tr></th></thead><tbody>");
+        for (var i=0; i<=n; i++){
+            // If row is even, then format row colouring accordingly (row number starts with 0)
+            if (i%2 == 0){
+                document.write("<tr class='evenRow'><td>" + i + "</td><td>" + factorial(i) + "</td></tr>");
+            }
+            // Else the row is odd
+            else {
+                document.write("<tr><td>" + i + "</td><td>" + factorial(i) + "</td></tr>");
+            }
+        }
+
+        // Close table tags
+        document.write("</tbody></table>");
+    </script>
+    <style>
+        table, th, td {
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+
+        caption {
+            padding: 5px 0;
+        }
+
+        tr.evenRow {
+            background-color: #DBEAF9;
+        }
+
+        th {
+            color: white;
+            background-color: blue;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 3px 10px;
+        }
+    </style>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <p></p><a href="homework3.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

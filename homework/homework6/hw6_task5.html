@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW6 Task 5</title>
+    <meta charset="utf-8">
+    <script src="hw6_task5.js"></script>
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        #error, #success {
+            padding-left: 15px;
+            font-style: italic;
+        }
+
+        #error {
+            color: red;
+        }
+
+        #success {
+            color: green;
+        }
+
+    </style>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <h1>Cheque Protection</h1>
+    <form action="" name="chequeProcessor">
+        <label for="amount">Enter a cheque amount: $</label>
+        <input type="text" name="amount" id="amount" value="" autocomplete="off">
+        <input type="button" value="Process" onclick="processCheque(document.getElementById('amount').value)">
+    </form>
+
+    <p id="success"></p>
+    <p id="error"></p>
+
+    <p><a href="homework6.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW2 Task 1</title>
+    <meta name="description" content="Javascript program that will take as input the miles driven and gallons used (both as integers), for each tankful of gas. The script should calculate and output HTML5 text that displays the number of miles per gallon obtained for each tankful and prints the combined number of miles per gallon obtained for all tankfuls up to this point">
+    <meta charset="urf-8">
+    <script>
+        // Declare variables
+        var miles;
+        var gallons;
+        var mileage;
+        var overallMileage;
+        var totalMiles;
+        var totalGallons;
+        var tanks;
+
+        // Initialise variables
+        miles = 0;
+        gallons = 0;
+        mileage = 0;
+        overallMileage = 0;
+        totalMiles = 0;
+        totalGallons = 0;
+        tanks = 1;
+
+        // Define integer regex
+        var intRegex = /^\d*$/;
+
+        // Prompt user for initial input
+        miles = prompt("Tank " + tanks + ": Enter number of miles driven (-1 to stop))");
+
+        // Keep looping while the input isn't -1
+        while(miles != -1){
+
+            // Validate miles input
+            while(!(miles.match(intRegex))){
+                miles = prompt("Tank " + tanks + ": Please enter miles driven as an integer");
+            }
+
+            // Prompt user for the gallons consumed
+            gallons = prompt("Tank " + tanks + ": Enter number of gallons used (integer)");
+
+            // Validate gallons input
+            while(!(gallons.match(intRegex)) || (gallons == 0)){
+                gallons = prompt("Tank " + tanks + ": Please enter gallons used as a non-zero integer");
+            }
+
+            // Calculate the current tank's mileage and also the overall mileage
+            mileage = miles/gallons;
+            totalMiles = Number(totalMiles) + Number(miles);
+            totalGallons = Number(totalGallons) + Number(gallons);
+            overallMileage = totalMiles/totalGallons;
+
+            // Print out the current tank's mileage as well as the overall mileage
+            if (miles != 0){
+                document.write("<p>Tank " + tanks + " mileage (mi/gl) = " + mileage.toFixed(2) + ", Overall mileage (mi/gl) = " + overallMileage.toFixed(2) + "</p>");
+            }
+            else{
+                document.write("<p>Tank " + tanks + ": No miles were entered</p>")
+            }
+
+            // Go onto to the next tank and prompt for input
+            tanks++;
+            miles = prompt("Tank " + tanks + ": Enter number of miles driven (-1 to stop))");
+        }
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <a href="homework2.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

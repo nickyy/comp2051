@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW6 Task 3</title>
+    <meta charset="utf-8">
+    <script src="hw6_task3.js"></script>
+    <style>
+        * {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        #errors {
+            padding-left: 15px;
+            color: red;
+            font-style: italic;
+        }
+
+        .phoneFormat {
+            font-weight: bold;
+            padding-left: 15px;
+            font-size: 1.5em;
+        }
+
+        p.phoneFormat {
+            margin: 5px 0;
+        }
+
+    </style>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <form action="" name="phoneNum">
+        <label for="phoneNum">Enter a phone number: (ie. (555) 555-1234)</label>
+        <input type="text" name="phoneNum" id="phoneNum" value="" autocomplete="off">
+        <input type="button" value="Parse Phone Number" onclick="parsePhone(document.getElementById('phoneNum').value)">
+    </form>
+
+    <p id="errors"></p>
+    <p class="phoneFormat" id="areaCode"></p>
+    <p class="phoneFormat" id="telephone"></p>
+
+
+    <p><a href="homework6.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<disabledEmails>
+    <email>email@domain.com</email>
+    <email>not@allowed.ca</email>
+</disabledEmails>

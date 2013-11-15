@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW3 Task 8</title>
+    <meta name="description" content="Javascript program that estimates the value of the mathematical constant e by using the formula e = 1 + 1/1! + 1/2! + 1/3! + 1/4!">
+    <meta charset="utf-8">
+    <script>
+        // Declare variables and initialise
+        var e = 0;
+
+        // Declare constants
+        var terms;
+
+        // Function that calculates the factorial of n (using recursion)
+        function factorial(n){
+            if (n == 0){
+                return 1;
+            }
+            else {
+                return factorial(n-1) * n;
+            }
+        }
+
+        // Function to approximate e based on the number of terms
+        function getEuler(terms){
+            // Declare and initialise e
+            var e = 0;
+
+            // Calculate the value for e = 1/0! + 1/1! + 1/2! + 1/3! + 1/4! + ... + 1/terms!
+            for (var i=0; i<terms; i++){
+                e = e + 1/factorial(i);
+            }
+
+            // Print out the approximation
+            document.getElementById('e').innerHTML = "e ~= " + "<span style='font-weight: bold'>" + e + "</span>";
+        }
+
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+
+    <p>Enter the number of terms of e to calculate <input type="text" name="terms" id="terms" autocomplete="off">
+        <input type="button" value="Calculate e" onclick="getEuler(document.getElementById('terms').value)"></p>
+    <p id="e"></p>
+
+    <p><a href="homework3.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

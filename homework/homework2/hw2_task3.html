@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW2 Task 3</title>
+    <meta name="description" content="JavaScript program that will determine the gross pay for each of three employees. The company pays 'straight time' for the first 40 hours worked by each employee and pays 'time and a half' for all hours worked in excess of 40 hours. You’re given a list of the employees of the company, the number of hours each employee worked last week, and the hourly rate of each employee. The script should input this information for each employee, determine the employee’s gross pay and output HTML5 text that displays the employee’s gross pay. Use prompt dialogs to input the data.">
+    <meta charset="utf-8">
+    <script>
+        // Declare variables
+        var totalHours;
+        var straightHours;
+        var overtimeHours;
+        var rate;
+        var grossPay;
+        var regularPay;
+        var overtimePay;
+
+        // Constants
+        var NUM_EMPLOYEES = 3;
+        var OVERTIME_RATE = 1.5;
+
+        // Define regex
+        var totalHoursRegex = /^\d*$/;
+        var rateRegex = /^\d*\.\d{2}$/;
+
+        // Initialise variables
+        totalHours = 0;
+        straightHours = 0;
+        overtimeHours = 0;
+        rate = 0;
+        grossPay = 0;
+        regularPay = 0;
+        overtimePay = 0;
+
+
+        for (var i=1; i<=NUM_EMPLOYEES; i++){
+            totalHours = prompt("Enter total hours worked last week for employee " + i);
+            while (!(totalHours.match(totalHoursRegex))){
+                totalHours = prompt("Please enter a valid number of total totalHours (integer)");
+            }
+
+            // Calculate any overtime
+            if (totalHours > 40){
+                overtimeHours = totalHours - 40;
+                straightHours = 40;
+            }
+            else {
+                straightHours = totalHours;
+            }
+
+            // Prompt user for the hourly rate
+            rate = prompt("Enter the hourly rate for employee " + i + " (to 2 decimal places)");
+            while (!(rate.match(rateRegex))){
+                rate = prompt("Please enter a valid hourly rate (up to 2 decimal places)");
+            }
+
+            // Calculate regular pay, overtime pay, and gross pay
+            regularPay = (straightHours*rate).toFixed(2);
+            overtimePay = (overtimeHours*rate*OVERTIME_RATE).toFixed(2);
+            grossPay = (Number(regularPay) + Number(overtimePay)).toFixed(2);
+
+            // Print results for each employee, displaying the gross, regular, and overtime pay
+            document.write("<p>Gross pay for employee " + i + " = $" + grossPay + " (Regular Pay = $" + regularPay + ", Overtime Pay = $" + overtimePay + ")</p>")
+        }
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <a href="homework2.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HW1 Task 3</title>
+    <meta name="description" content="Javascript program that uses the three primitive data types and prints output for each type. In the same script, print the following: She cried, 'Aren't you going to help me?'">
+	<meta charset="utf-8">
+	
+	<script>
+	
+		// Declare variables for the three primitive data types
+		// Number variable
+		var number = prompt("Enter a number");
+		while(isNaN(number)){
+			number = prompt("Please enter a number");
+		}
+		number = Number(number); // Convert input to a number; could also use parseFloat()
+		
+		// String variable
+		var string = prompt("Enter a string");
+		
+		// Boolean variable
+		var bool = prompt("Enter 'false' or 'true'");
+		var regexFalse = /^[fF][aA][lL][sS][eE]$/;
+		var regexTrue = /^[tT][rR][uU][eE]$/;
+		while(!(bool.match(regexFalse)) && !(bool.match(regexTrue))){
+			bool = prompt("Please enter either 'false' or 'true'");
+		}
+		
+		// Convert bool string to an actual boolean
+		if (bool.match(regexFalse)){
+			bool = false;
+		}
+		else {
+			bool = true;
+		}
+		
+		// Produce output for the various primitive data types
+		// Output for number data type
+		document.write("<h1 style='font-size:1.2em'>Numbers</h1>");
+		document.write("<p>" + number + " is of type <span style='font-weight:bold'>" + typeof(number) + "</span></p>");
+		
+		// Output for string data type
+		document.write("<h1 style='font-size:1.2em'>Strings</h1>");
+		document.write("<p>'" + string + "' is of type <span style='font-weight:bold'>" + typeof(string) + "</span></p>");
+		
+		// Output for boolean data type
+		document.write("<h1 style='font-size:1.2em'>Booleans</h1>");
+		document.write("<p>" + bool + " is of type <span style='font-weight:bold'>" + typeof(bool) + "</span></p>");
+		
+		// Print out random string
+		document.write("<h1 style='font-size:1.2em'>Random string</h1>");
+		document.write('<p>She cried, "Aren\'t you going to help me?"</p>');
+	</script>
+</head>
+<body>
+	<noscript>
+		<p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+	</noscript>
+	<a href="homework1.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

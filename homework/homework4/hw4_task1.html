@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW4 Task 1</title>
+    <meta name="description" content="Javascript program that determines, for a pair of integers, whether the second integer is a multiple of the first. The function should take two integer arguments and return true if the second is a multiple of the first, and false otherwise. Incorporate this function into a script that inputs a series of pairs of integers (one pair at a time). The HTML5 form should consist of two text fields and a button to initiate the calculation. The user should interact with the program by typing numbers in both text fields, then clicking a button.">
+    <meta charset="utf-8">
+
+    <style>
+        body {
+            font-family: arial, tahoma, sans-serif;
+        }
+
+        #multiple {
+            color: green;
+            font-style: italic;
+        }
+
+        #notMultiple {
+            color: red;
+            font-style: italic;
+        }
+
+        input, label {
+            display: inline-block;
+            margin: 5px 0;
+        }
+
+        .labelCol {
+            min-width: 170px;
+        }
+
+        .inputField {
+            width: 50px;
+        }
+    </style>
+    <script>
+        // Declare variables
+        var input1;
+        var input2;
+
+        // Define integer regex
+        var intRegex = /^[-]?\d+$/;
+
+        // Function to determine if one value is a multiple of another value
+        function isMultiple(val1, val2){
+            // Validate first input
+            if (!(val1.match(intRegex))){
+                alert("First value must be an integer");
+                document.getElementById('val1').select();
+                return;
+            }
+
+            // Validate second input
+            if (!(val2.match(intRegex))){
+                alert("Second value must be an integer");
+                document.getElementById('val2').select();
+                return;
+            }
+
+            // Convert values to number type
+            val1 = Number(val1);
+            val2 = Number(val2);
+
+            // Determine, by modulus, if second value is a multiple of first value
+            if (val2%val1 == 0){
+                document.getElementById('isMultiple').innerHTML = '<span id="multiple">' + val2 + ' is a multiple of ' + val1 + '</span>';
+                return true;
+            }
+            else {
+                document.getElementById('isMultiple').innerHTML = '<span id="notMultiple">' + val2 + ' is not a multiple of ' + val1 + '</span>';
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <label for="val1" class="labelCol">Enter the first value:</label><input class="inputField" type="text" name="val1" id="val1" autocomplete="off"><br>
+    <label for="val2" class="labelCol">Enter the second value:</label><input class="inputField" type="text" name="val2" id="val2" autocomplete="off"><br>
+    <input type="button" value="Determine if second value multiple of first" onclick="isMultiple(document.getElementById('val1').value, document.getElementById('val2').value)"><br>
+    <p id="isMultiple"></p>
+
+    <p><a href="homework4.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'></p>
+</body>
+</html>

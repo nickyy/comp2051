@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW2 Task 2</title>
+    <meta name="description" content="Javascript program that inputs one salesperson’s items sold for last week, calculates the salesperson’s earnings, and outputs HTML5 text that displays the salesperson’s earnings">
+    <meta charset="utf-8">
+    <script>
+        // Declare variables
+        var quantity;
+        var sales;
+        var grossSales;
+        var grossPay;
+        var itemVal;
+        var quantityRegex = /^\d*$/;
+
+        // Define constants
+        var BASE_EARNING = 200;
+        var COMMISSION_RATE = 0.09;
+
+        // Initialise variables
+        quantity = 0;
+        sales = 0;
+        grossSales = 0;
+        grossPay = 0;
+        itemVal = 0;
+
+        // Loop through the 4 inventory items
+        for (var items=1; items<=4; items++){
+
+            // Prompt user for the number of units sold
+            quantity = prompt("Enter the quantity of item #" + items + " sold");
+
+            // Validate user input
+            while(!(quantity.match(quantityRegex))){
+                quantity = prompt("Please enter the quantity of item #" + items + " sold as an integer")
+            }
+
+            // Determine the item value based on the item number
+            switch(items){
+                case(1):
+                    itemVal = 239.99;
+                    break;
+                case(2):
+                    itemVal = 129.75;
+                    break;
+                case(3):
+                    itemVal = 99.95;
+                    break;
+                case(4):
+                    itemVal = 350.89;
+                    break;
+                default:
+                    alert("That item number doesn't exist");
+                    break;
+            }
+
+            // Calculate the total sales for that particular item
+            sales = quantity*itemVal;
+
+            // Print out item sales summary
+            document.write("<p>Earnings from item " + items + " (" + quantity + " units at $" + itemVal + " each) = " + sales.toFixed(2) + "</p>");
+
+            // Calculate the gross sales
+            grossSales = sales + grossSales;
+        }
+
+        // Calculate the gross pay for the salesperson
+        grossPay = BASE_EARNING + COMMISSION_RATE*grossSales;
+
+        // Print out gross pay
+        document.write("<p style='font-weight: bold;'>Gross pay = $" + grossPay.toFixed(2) + "</p>");
+    </script>
+</head>
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <a href="homework2.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

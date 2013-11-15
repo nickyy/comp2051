@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HW1 Task 10</title>
+    <meta name="description" content="JavaScript program that reads five integers and determines and outputs text that displays the larges and smallest integers in the group.">
+	<meta charset="utf-8">
+	
+	<script>
+		// Prompt the user to enter 5 numbers
+		var myArray = new Array(5);
+		
+		// Regex for integer validation
+		var regex = /^[-]?[0-9]+$/;
+		
+		// Prompt user for 5 integers
+		for (var i=1; i<=myArray.length; i++){
+			myArray[i-1] = prompt("Please enter integer #" + i);
+			while(!myArray[i-1].match(regex)){
+				myArray[i-1] = prompt("Sorry, please re-enter an integer.");
+			}
+		}
+		
+		// Determine the largest and smallest values entered
+		var largest = Math.max.apply(Math, myArray);
+		var smallest = Math.min.apply(Math, myArray);
+		
+		// Write the results to the page
+		document.write("<p>You entered: ");
+		for (var j=0; j<myArray.length; j++){
+			document.write(myArray[j] + "  ");
+		}
+		
+		document.write("<p>The largest value you entered was " + largest + ".</p>");
+		document.write("<p>The smallest value you entered was " + smallest + ".</p>");
+	</script>
+		
+</head>
+<body>	
+	<noscript>
+		<p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+	</noscript>
+	<a href="homework1.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>

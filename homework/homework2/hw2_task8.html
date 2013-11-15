@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW2 Task 8</title>
+    <meta name="description" content="JavaScript program that reads in a five-digit integer and determines whether it’s a palindrome. If the number is not five digits long, display an alert dialog indicating the problem to the user. Allow the user to enter a new value after dismissing the alert dialogue.">
+    <meta charset="utf-8">
+    <script>
+        // Regex to validate 5-digit number
+        var dataRegex = /^\d{5}$/;
+
+        // Prompt user for input
+        var data = prompt("Enter a 5-digit number, or -1 to quit");
+
+        // Function to determine if a number is a palindrome (using division and modulus)
+        function isPalindrome(number){
+            // Declare and initialise variables
+            var palindrome = (number);
+            var numberReversed = 0;
+            var remainder = 0;
+
+            while (palindrome != 0){   // use '!=' rather than '>' to all for negative numbers
+                // Pick off the last digit by using modulo 10 operation
+                remainder = palindrome % 10;
+
+                // Build the reversal of the original number
+                numberReversed = numberReversed * 10 + remainder;
+
+                // Reduce the palindrome by a factor of 10
+                palindrome = palindrome / 10;
+
+                // Remove the decimal portion after dividing by 10
+                palindrome = parseInt(palindrome);
+                //alert("hey" + parseInt(12.1));
+            }
+            //alert(numberReversed);
+
+            // If 'numberReversed' is the same as 'number', then 'number' is a palindrome
+            if (numberReversed == number){
+                return true;
+            }else {
+                return false;
+            }
+        }
+
+        // Continue to prompt user for input
+        while (data != -1){
+
+            // Validate user input
+            while (!(data.match(dataRegex))){
+                data = prompt("ERROR: The 5-digit number you entered was malformed. Please try again.")
+            }
+
+            // Convert the input from a string to a number data type
+            data = Number(data);
+
+            // Print out success or failure message
+            if (isPalindrome(data)){
+                alert(data + " is a palindrome");
+            }
+            else {
+                alert(data + " is NOT a palindrome");
+            }
+
+            // Prompt user for input or to stop
+            var data = prompt("Enter a 5-digit number, or -1 to quit");
+        }
+
+        // Print a thank you message if quitting
+        document.write("<p>Thanks for playing the Palindrome Game!</p>");
+
+    </script>
+</head>
+
+<body>
+    <noscript>
+        <p><a href="http://enable-javascript.com/">Oh no, you're missing out on ALL that Javascript has to offer! Please enable Javascript on your browser.</a></p>
+    </noscript>
+    <a href="homework2.html">Go back</a> or <input type="button" value="Play again" onclick='window.location.reload()'>
+</body>
+</html>
